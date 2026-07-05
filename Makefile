@@ -6,7 +6,7 @@
 #    By: lucho <lucho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/26 16:02:09 by dachin            #+#    #+#              #
-#    Updated: 2026/07/05 18:39:12 by lucho            ###   ########.fr        #
+#    Updated: 2026/07/05 23:29:31 by lucho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =	src/main.c \
 		src/debug_map.c \
 		src/engine/engine.c \
+		src/engine/hooks.c \
 
 OBJ_DIR = o_files
 OBJS = $(patsubst src/%.c, $(OBJ_DIR)/%.o, $(SRCS))
