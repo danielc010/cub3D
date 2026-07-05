@@ -13,3 +13,8 @@ a.out
 # Test artifacts
 *.dSYM/
 *.log
+
+# MLX42
+MLX42/
+o_files/
+cub3D

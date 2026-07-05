@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dachin <dachin@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/06/26 15:54:34 by dachin        #+#    #+#                 */
-/*   Updated: 2026/06/26 16:06:13 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/26 15:54:34 by dachin            #+#    #+#             */
+/*   Updated: 2026/07/05 22:50:27 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "cub3d.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
-
+	t_game	game;
+	
+	load_debug_map(&game);
+	engine_run(&game);
 	return 0;
 }
