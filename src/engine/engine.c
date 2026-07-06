@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:38:36 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/06 00:09:19 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/06 22:51:54 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	engine_run(t_game *game)
 	i = mlx_image_to_window(game->mlx, game->img, 0, 0);
 	if (i == -1)
 		return ;
+	mlx_loop_hook(game->mlx, game_loop_hook, game);
 	mlx_close_hook(game->mlx, handle_close, game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop(game->mlx);

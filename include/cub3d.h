@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/06 00:10:51 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/06 22:47:07 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_game
 
 void	load_debug_map(t_game *g);
 void	key_hook(mlx_key_data_t keydata, void* param);
+void	game_loop_hook(void *param);
 
 // A's prototypes
 void	parse(t_game *game, const char *file);
