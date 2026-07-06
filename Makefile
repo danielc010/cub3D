@@ -6,7 +6,7 @@
 #    By: dachin <dachin@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2026/06/26 16:02:09 by dachin        #+#    #+#                  #
-#    Updated: 2026/07/06 16:15:10 by dachin        ########   odam.nl          #
+#    Updated: 2026/07/07 00:55:02 by dachin        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,36 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
+# MLX42 paths and libraries
+MLX42_DIR = ../MLX42
+MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
+MLX42_HEADERS = $(MLX42_DIR)/include
+
+# Detect OS
+UNAME_S := $(shell uname -s)
+
+# Graphics linking flags (OS-specific). Darwin is macOS
+ifeq ($(UNAME_S),Darwin)
+    GRAPHICS_LIBS = $(MLX42_LIB) -Iinclude -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+else
+    GRAPHICS_LIBS = $(MLX42_LIB) -Iinclude -ldl -lglfw -pthread -lm
+endif
+
 all: $(NAME)
 
 $(LIBFT_LIB):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS) $(LIBFT_LIB)
-	$(CC) $(CFLAGS) $(OBJS) -L ./$(LIBFT_DIR) -lft $(LDLIBS) -o $(NAME)
+# Check if MLX42 library exists, if not provide helpful error
+$(MLX42_LIB):
+	@if [ ! -f $(MLX42_LIB) ]; then \
+		echo "Error: MLX42 library not found at $(MLX42_LIB)"; \
+		echo "Please build MLX42 first:"; \
+		echo "cd $(MLX42_DIR) && cmake -B build && cmake --build build -j4"; \
+		exit 1; \
+
+$(NAME): $(MLX42_LIB) $(OBJS) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(OBJS) $(GRAPHICS_LIBS) -L ./$(LIBFT_DIR) -lft $(LDLIBS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -Iinclude -c $< -o $@

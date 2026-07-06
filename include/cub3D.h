@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/06/26 15:54:45 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/06 22:06:10 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/07 00:49:38 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ void	free_map(t_map *map);
 void	free_game(t_game *game);
 char	**read_lines(int fd, t_game *game);
 char	**list_to_array(t_list *list, t_game *game);
+void	try_tex(char *line, t_game *game, char *id, int index);
+void	chk_tex_set(t_game *game);
 
 #endif
