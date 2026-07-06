@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_islanum.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 17:17:54 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/23 13:50:10 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/22 12:39:24 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/26 17:40:27 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
+#include <assert.h>
 
 int	ft_isalnum(int c)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	else if (c >= '0' && c <= '9')
+	if (((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z'))
+		|| ((c >= '0') && (c <= '9')))
 		return (1);
 	else
 		return (0);
 }
-
-// int main()
-// {
-//     char c;
-
-//     c = '!';
-//     printf("%d", ft_isalnum(c));
-//     return(0);
-// }

@@ -3,32 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 17:18:04 by luimarti          #+#    #+#             */
-/*   Updated: 2025/05/08 19:03:23 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/30 19:35:16 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/07 13:51:11 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
+/**
+ * @brief Outputs the integer ’n’ to the specified file descriptor.
+ * @param n The integer to output.
+ * @param fd The file descriptor on which to write.
+ */
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	digit;
+	long	nbr;
+	char	s[10];
+	int		i;
+	int		j;
 
-	if (n == -2147483648)
+	i = 9;
+	j = 9;
+	nbr = (long)n;
+	if (n == 0)
 	{
-		write (fd, "-2147483648", 11);
+		write (fd, "0", 1);
 		return ;
 	}
-	if (n < 0)
+	if (nbr < 0)
 	{
-		write(fd, "-", 1);
-		n = -n;
+		write (fd, "-", 1);
+		nbr = -nbr;
 	}
-	if (n > 9)
-		ft_putnbr_fd(n / 10, fd);
-	digit = (n % 10) + '0';
-	write (fd, &digit, 1);
+	while (nbr > 0)
+	{
+		s[i] = nbr % 10 + '0';
+		nbr /= 10;
+		--i;
+	}
+	write (fd, &s[i + 1], j - i);
 }

@@ -6,7 +6,7 @@
 #    By: dachin <dachin@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2026/06/26 16:02:09 by dachin        #+#    #+#                  #
-#    Updated: 2026/06/26 16:03:17 by dachin        ########   odam.nl          #
+#    Updated: 2026/07/06 16:15:10 by dachin        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = src/main.c \
+SRCS = 	src/main.c \
+		src/parse/parse.c \
+		src/utils/utils1.c \
 
 OBJ_DIR = o_files
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
@@ -31,6 +33,12 @@ $(NAME): $(OBJS) $(LIBFT_LIB)
 	$(CC) $(CFLAGS) $(OBJS) -L ./$(LIBFT_DIR) -lft $(LDLIBS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -Iinclude -c $< -o $@
+
+$(OBJ_DIR)/%.o: src/parse/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -Iinclude -c $< -o $@
+
+$(OBJ_DIR)/%.o: src/utils/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -Iinclude -c $< -o $@
 
 $(OBJ_DIR):

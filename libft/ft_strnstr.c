@@ -3,45 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 14:13:01 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/28 15:48:59 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/23 13:12:42 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/28 09:31:02 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t length)
+/**
+ * @brief The strnstr() function locates the first occurrence of the null-
+ * terminated string little in the string big, where not more than len 
+ * characters are searched.  Characters that appear after a ‘\0’ character are 
+ * not searched.  Since the strnstr() function is a FreeBSD specific API, it 
+ * should only be used when portability is not a concern.
+ * @param big 
+ * @param little Null terminated string
+ * @param n 
+ * @return char* If little is an empty string, big is returned; if little 
+ * occurs nowhere in big, NULL is returned; otherwise a pointer to the first 
+ * character of the first occurrence of little is returned.
+ */
+char	*ft_strnstr(char *big, char *little, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
-	j = 0;
-	if (little[j] == '\0')
-		return ((char *)big);
-	while (big[i] != '\0' && i < length)
+	if (!little[0])
+		return (big);
+	while (big[i] && i < len)
 	{
 		j = 0;
-		while (big[i + j] == little[j] && i + j < length)
+		while (big[i + j] == little[j] && little[j]
+			&& big[i + j] && i + j < len)
 		{
-			if (little[j + 1] == '\0')
-				return ((char *)big + i);
-			j++;
+			++j;
+			if (!little[j])
+				return (&big[i]);
 		}
-		i++;
+		++i;
 	}
 	return (NULL);
 }
-
-// int main ()
-// {
-// 	const char big [] = "Hello Codam Hello";
-// 	const char little [] = "Codam";
-// 	char *result = ft_strnstr(big, little, 11);
-// 	printf ("%s", result);
-// 	return (0);
-// }

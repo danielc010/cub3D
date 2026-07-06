@@ -3,40 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 16:26:36 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/28 18:57:13 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/24 16:16:39 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/27 20:52:02 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
+/**
+ * @brief The  memchr()  function scans the initial n bytes of the memory area 
+ * pointed to by s for the first instance of c.  Both c and the bytes of the 
+ * memory area pointed to by s are interpreted as unsigned char.
+ * @param s 
+ * @param c 
+ * @param n 
+ * @return void* The  memchr()  and memrchr() functions return a pointer to 
+ * the matching byte or NULL if the character does not occur in the given 
+ * memory area.
+ */
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*ptr;
-	unsigned char	spot;
+	unsigned char	*p;
 	size_t			i;
 
-	ptr = (unsigned char *)s;
-	spot = (unsigned char)c;
+	p = (unsigned char *)s;
 	i = 0;
 	while (i < n)
 	{
-		if (ptr[i] == spot)
-			return ((void *)(ptr + i));
-		else
-			i++;
+		if (p[i] == (unsigned char)(c))
+			return ((void *)&p[i]);
+		++i;
 	}
 	return (NULL);
 }
-
-// int main()
-// {
-// 	const char a [] = "Hello world!";
-// 	void *spot = ft_memchr (a, 'z', 12);
-// 	printf("%p\n", spot);
-// 	return (0);
-// }

@@ -13,3 +13,6 @@ a.out
 # Test artifacts
 *.dSYM/
 *.log
+
+PLAN.md
+CLAUDE.md

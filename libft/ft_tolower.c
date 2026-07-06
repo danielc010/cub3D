@@ -3,26 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 10:56:09 by luimarti          #+#    #+#             */
-/*   Updated: 2025/05/03 13:25:33 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/22 17:06:43 by dachin            #+#    #+#             */
+/*   Updated: 2025/04/30 10:47:40 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_tolower(int c)
 {
-	if (c >= 65 && c <= 90)
+	if ((c >= 'A') && (c <= 'Z'))
 		return (c + 32);
-	return (c);
+	else
+		return (c);
 }
-// int main()
-// {
-// 	char upper = 'L';
-// 	char lower = ft_tolower(upper);
-// 	printf("%c\n", lower);
-// 	return (0);
-// }

@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 17:11:19 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/22 17:16:27 by luimarti         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_isdigit.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dachin <dachin@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/04/22 12:39:24 by dachin        #+#    #+#                 */
+/*   Updated: 2025/09/02 15:22:06 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
+	if ((c >= '0') && (c <= '9'))
 		return (1);
 	else
 		return (0);
 }
-
-// int main()
-// {
-//     char c;
-
-//     c = '5';
-//     printf("%d", ft_isdigit(c));
-//     return(0);
-// }

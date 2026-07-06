@@ -1,69 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_calloc.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: luimarti <luimarti@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/03 10:18:48 by luimarti      #+#    #+#                 */
-/*   Updated: 2026/06/15 16:52:53 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 18:06:30 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/28 16:56:42 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
-
+#include "libft.h"
+#include <stdint.h>
+/**
+ * @brief The calloc() function allocates memory for an array of  nmemb  
+ * elements of  size bytes each and returns a pointer to the allocated memory.
+ * The memory is set to zero.  If nmemb or size is 0,  then  calloc()  returns
+ * either  NULL,  or a unique pointer value that can later be successfully
+ * passed to free().  If the multiplication of nmemb and size would result
+ * in  integer  overflow, then calloc() returns an error.  By contrast, an
+ * integer overflow would not be detected in the following  call  to  malloc(),
+ * with the result that an incorrectly sized block of memory would be 
+ * allocated: malloc(nmemb * size);
+ * @param nmemb 
+ * @param size 
+ * @return void* The malloc() and calloc() functions return a pointer to  
+ * the  allocated memory,  which  is  suitably  aligned for any built-in type.
+ * On error, these functions return NULL.  NULL may also be returned by a 
+ * successful call  to  malloc() with a size of zero, or by a successful call 
+ * to calloc() with nmemb or size equal to zero.
+ */
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	unsigned char	*tmp;
-	size_t			i;
+	void	*ptr;
 
 	if (nmemb == 0 || size == 0)
 		return (malloc(0));
-	if (nmemb > __SIZE_MAX__ / size)
+	if (size != 0 && nmemb > SIZE_MAX / size)
 		return (NULL);
-	tmp = malloc (nmemb * size);
-	i = 0;
-	if (!tmp)
+	ptr = malloc(nmemb * size);
+	if (!ptr)
 		return (NULL);
-	while (i < nmemb * size)
-		tmp [i++] = 0;
-	return (tmp);
+	ft_bzero(ptr, (nmemb * size));
+	return (ptr);
 }
-//nmemb * size needed in case of the size of char changes in the system.
-// int main ()
-// {
-// 	size_t n = 10;
-//     char *my_calloc = (char *)ft_calloc(n, sizeof(char));
-//     char *std_calloc = (char *)calloc(n, sizeof(char));
-//     int i = 0;
-//     int identical = 1;
-
-//     if (!my_calloc || !std_calloc)
-//     {
-//         printf("Error: Memory allocation failed.\n");
-//         free(my_calloc);
-//         free(std_calloc);
-//         return (1);
-//     }
-
-//     while (i < (int)n)
-//     {
-//         if (my_calloc[i] != std_calloc[i])
-//         {
-//             identical = 0;
-//             break;
-//         }
-//         i++;
-//     }
-
-//     if (identical)
-//         printf("✅ Both versions match.\n");
-//     else
-//         printf("❌ Versions does not match.\n");
-
-//     free(my_calloc);
-//     free(std_calloc);
-//     return (0);
-// }

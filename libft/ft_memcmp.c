@@ -3,44 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 17:30:34 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/28 19:13:55 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/24 17:32:57 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/07 13:43:53 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char	*mem1;
-	const unsigned char	*mem2;
-	size_t				i;
+	size_t			i;
+	unsigned char	*p1;
+	unsigned char	*p2;
 
-	mem1 = (const unsigned char *)s1;
-	mem2 = (const unsigned char *)s2;
 	i = 0;
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
 	if (n == 0)
 		return (0);
 	while (i < n)
 	{
-		if (mem1[i] != mem2[i])
-		{
-			return (mem1[i] - mem2[i]);
-		}
-		i++;
+		if (p1[i] != p2[i])
+			return (p1[i] - p2[i]);
+		++i;
 	}
 	return (0);
 }
-
-// int main()
-// {
-// 	const char s1 [] = "Hello";
-// 	const char s2 [] = "Hello";
-// 	int result = ft_memcmp(s1, s2, 5);
-// 	printf("%d\n", result);
-// 	return (0);	
-// }

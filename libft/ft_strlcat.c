@@ -1,54 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 17:25:54 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/25 21:45:43 by luimarti         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_strlcat.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dachin <dachin@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/04/23 12:05:02 by dachin        #+#    #+#                 */
+/*   Updated: 2025/06/20 13:43:50 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+/**
+ * @brief The strlcpy() and strlcat() functions copy and concatenate strings 
+ * respectively.  They are designed to be safer, more consistent, and less 
+ * error prone replacements for strncpy(3) and strncat(3).  Unlike those 
+ * functions, strlcpy() and strlcat() take the full size of the buffer 
+ * (not just the length) and guarantee to NUL-terminate the result (as long 
+ * as size is larger than 0 or, in the case of strlcat(), as long as there 
+ * is at least one byte free in dst).  Note that a byte for the NUL should 
+ * be included in size.  Also note that strlcpy() and strlcat() only operate 
+ * on true “C” strings.  This means that for strlcpy() src must be 
+ * NUL-terminated and for strlcat() both src and dst must be NUL-
+ * terminated.
+ * 
+ * The strlcpy() function copies up to size - 1 characters from the 
+ * NUL-terminated string src to dst, NUL-terminating the result.
+ * 
+ * The strlcat() function appends the NUL-terminated string src to the end of 
+ * dst.  It will append at most size - strlen(dst) - 1 bytes, 
+ * NUL-terminating the result.
+ * @param dst 
+ * @param src 
+ * @param n 
+ * @return size_t 
+ */
+size_t	ft_strlcat(char *dst, const char *src, size_t n)
 {
-	size_t	i;
 	size_t	d_len;
 	size_t	s_len;
+	size_t	i;
 
-	i = 0;
 	d_len = 0;
-	s_len = 0;
-	while (d_len < size && dest[d_len] != '\0')
-		d_len++;
-	while (src[s_len] != '\0')
-		s_len++;
-	if (d_len == size)
-		return (size + s_len);
-	while (d_len + i < size - 1 && src[i] != '\0')
+	s_len = ft_strlen(src);
+	i = 0;
+	while (d_len < n && dst[d_len])
+		++d_len;
+	if (d_len == n)
+		return (n + s_len);
+	while ((i < (n - d_len - 1)) && src[i])
 	{
-		dest[d_len + i] = src[i];
-		i++;
+		dst[d_len + i] = src[i];
+		++i;
 	}
-	if (d_len + i < size)
-		dest[d_len + i] = '\0';
+	if (d_len + i < n)
+		dst[d_len + i] = '\0';
 	return (d_len + s_len);
 }
-
-// int main ()
-// {
-// 	char dest [12] = "Hello";
-// 	char src [] = "World!";
-// 	size_t res;
-// 	res = ft_strlcat (dest, src, 12);
-// 	printf ("%zu", res);
-// 	return (0);
-// }
-
-//(line 31)Using size instead of d_len because not known
-//if there is a \0 at the end, so the end of dest is not detected.
-// Here (line 39) the \0 is detected and we can use d_len.

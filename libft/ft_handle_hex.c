@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philo.h                                            :+:    :+:            */
+/*   ft_handle_hex.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2026/06/26 15:54:45 by dachin        #+#    #+#                 */
-/*   Updated: 2026/06/26 16:01:38 by dachin        ########   odam.nl         */
+/*   Created: 2025/06/12 09:20:54 by dachin        #+#    #+#                 */
+/*   Updated: 2025/06/12 10:00:48 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "ft_printf.h"
 
-# include "../libft/libft.h"
+int	ft_handle_hex(va_list *args, int upper)
+{
+	unsigned int	n;
 
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/time.h>
-# include <math.h>
-
-#endif
+	n = va_arg(*args, unsigned int);
+	return (ft_uitoa_hex(n, upper));
+}

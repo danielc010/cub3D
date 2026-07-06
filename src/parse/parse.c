@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dachin <dachin@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/06 16:45:55 by dachin        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/cub3D.h"
+
+// Check for number of arguments, file extension, ability to open file
+int	validate_args(int argc, char **argv)
+{
+	size_t	len;
+	int		fd;
+
+	if (argc != 2)
+		return (1);
+	len = ft_strlen(argv[1]);
+	if (len < 4 || ft_strncmp(argv[1] + len - 4, ".cub", 4))
+		return (1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (1);
+	close(fd);
+	return (0);
+}
+
+// Store lines read into a linked list, so we know how much to allocate
+char **read_lines(int fd, t_game *game)
+{
+	t_list	*list;
+	char	*line;
+	void	*new_node;
+	char 	**line_array;
+
+	list = NULL;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		new_node = ft_lstnew(line);
+		if (!new_node)
+			error_exit(game, "read_line fail");
+		ft_lstadd_back(&list, new_node);
+	}
+	line_array = list_to_array(list, game);
+	return (line_array);
+}
+
+// Copy the linked list contents to the array. Free nodes but not content.
+char	**list_to_array(t_list *list, t_game *game)
+{
+	int		size;
+	int		i;
+	char 	**line_array;
+	t_list	*cur_node;
+
+	size = ft_lstsize(list);
+	line_array = ft_calloc(size + 1, sizeof(char *));
+	if (!line_array)
+		error_exit(game, "readline fail");
+	i = 0;
+	while (i < size)
+	{
+		line_array[i] = list->content;
+		cur_node = list;
+		list = list->next;
+		free(cur_node);
+		++i;
+	}
+	return (line_array);
+}
