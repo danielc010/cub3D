@@ -6,19 +6,19 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 14:14:00 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/06 16:16:22 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/06 22:08:01 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+// TODO: add mlx_terminate(game->mlx);
 void	error_exit(t_game *game, char *msg)
 {
 	write(2, "Error\n", 6);
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
 	free_game(game);
-	// mlx_terminate(game->mlx);
 	exit(1);
 }
 
@@ -45,5 +45,3 @@ void	free_game(t_game *game)
 {
 	free_map(&game->map);
 }
-
-

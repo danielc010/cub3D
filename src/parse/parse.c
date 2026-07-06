@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/06 16:45:55 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/06 22:07:30 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ int	validate_args(int argc, char **argv)
 	return (0);
 }
 
-// Store lines read into a linked list, so we know how much to allocate
-char **read_lines(int fd, t_game *game)
+// Store lines read into a linked list, so we know how much to allocate.
+// Strip extra trailing \n from end of the line
+char	**read_lines(int fd, t_game *game)
 {
 	t_list	*list;
 	char	*line;
 	void	*new_node;
-	char 	**line_array;
+	char	**line_array;
+	int		len;
 
 	list = NULL;
 	while (1)
@@ -44,6 +46,9 @@ char **read_lines(int fd, t_game *game)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		len = ft_strlen(line);
+		if (len != 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
 		new_node = ft_lstnew(line);
 		if (!new_node)
 			error_exit(game, "read_line fail");
@@ -58,7 +63,7 @@ char	**list_to_array(t_list *list, t_game *game)
 {
 	int		size;
 	int		i;
-	char 	**line_array;
+	char	**line_array;
 	t_list	*cur_node;
 
 	size = ft_lstsize(list);
