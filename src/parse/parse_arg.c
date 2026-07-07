@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse.c                                            :+:    :+:            */
+/*   parse_arg.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/07 00:49:59 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/07 14:08:39 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,59 +82,4 @@ char	**list_to_array(t_list *list, t_game *game)
 	return (line_array);
 }
 
-void	try_tex(char *line, t_game *game, char *id, int index)
-{
-	mlx_texture_t	*texture;
-	char			*path;
-	int				pos;
 
-	pos = 2;
-	if (!ft_strncmp(line, id, 2))
-	{
-		if (line[2] == ' ' || line[2] == '\t')
-		{
-			while (line[pos] == ' ' || line[pos] == '\t')
-				++pos;
-		}
-		else
-			error_exit(game, "Invalid texture format");
-		if (game->map.tex[index].tex != NULL)
-			error_exit(game, "Duplicate texture");
-		path = ft_strdup(line + pos);
-		if (!path)
-			error_exit(game, "Strdup failed");
-		texture = mlx_load_png(path);
-		if (texture == NULL)
-			error_exit(game, "Texture loading failed");
-		free(path);
-		game->map.tex[index].tex = texture;
-	}
-}
-
-void	dispatcher(t_game *game, char **content)
-{
-	int	i;
-
-	i = 0;
-	while (content[i])
-	{
-		try_tex(content[i], game, "NO", TEX_NO);
-		try_tex(content[i], game, "SO", TEX_SO);
-		try_tex(content[i], game, "EA", TEX_EA);
-		try_tex(content[i], game, "WE", TEX_WE);
-		++i;
-	}
-}
-
-void	chk_tex_set(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (game->map.tex[i].tex == NULL)
-			error_exit(game, "Not all textures set");
-		++i;
-	}
-}

@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 14:14:00 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/06 22:08:01 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/08 00:00:54 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ void	free_map(t_map *map)
 void	free_game(t_game *game)
 {
 	free_map(&game->map);
+}
+
+void	free_char_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		++i;
+	}
+	free(array);
 }

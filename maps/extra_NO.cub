@@ -1,9 +1,10 @@
-NO ./path_to_the_north_texture
+NO ./textures/Brick_08-512x512.png
 
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
+NO ./textures/Brick_08-512x512.png
+SO ./textures/Brick_09-512x512.png
+WE ./textures/Brick_12-512x512.png
 
-EA ./path_to_the_east_texture
+EA ./textures/Brick_19-512x512.png
 
 F 220,100,0
 C 225,30,0

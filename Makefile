@@ -6,7 +6,7 @@
 #    By: dachin <dachin@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2026/06/26 16:02:09 by dachin        #+#    #+#                  #
-#    Updated: 2026/07/07 00:55:02 by dachin        ########   odam.nl          #
+#    Updated: 2026/07/08 00:14:24 by dachin        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = 	src/main.c \
-		src/parse/parse.c \
+		src/parse/parse_arg.c \
+		src/parse/parse_tex.c \
+		src/parse/parse_fc.c \
 		src/utils/utils1.c \
 
 OBJ_DIR = o_files
@@ -51,6 +53,7 @@ $(MLX42_LIB):
 		echo "Please build MLX42 first:"; \
 		echo "cd $(MLX42_DIR) && cmake -B build && cmake --build build -j4"; \
 		exit 1; \
+		fi
 
 $(NAME): $(MLX42_LIB) $(OBJS) $(LIBFT_LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(GRAPHICS_LIBS) -L ./$(LIBFT_DIR) -lft $(LDLIBS) -o $(NAME)
