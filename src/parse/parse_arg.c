@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/07 14:08:39 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/08 00:45:27 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,3 @@ char	**list_to_array(t_list *list, t_game *game)
 	}
 	return (line_array);
 }
-
-

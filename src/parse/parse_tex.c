@@ -6,12 +6,13 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/07 14:08:23 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/08 00:22:53 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/09 13:37:52 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+// TODO: do we accept tabs? Subject says spaces
 void	try_tex(t_game *game, char *line, char *id, int index)
 {
 	mlx_texture_t	*texture;

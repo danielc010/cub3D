@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/07 14:09:48 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/08 00:28:25 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/08 00:45:48 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ char	**extract_chk_color(t_game *game, char *line, int pos)
 // TODO: fix leak on early exit for pack_color
 void	try_color(t_game *game, char *line)
 {
-	int		pos;
-	char	**array;
+	int			pos;
+	char		**array;
 	uint32_t	*target;
 
 	pos = 1;
@@ -111,7 +111,8 @@ void	try_color(t_game *game, char *line)
 			target = &game->map.floor_color;
 		if (line[0] == 'C')
 			target = &game->map.ceiling_color;
-		*target = pack_color(game, ft_atoi(array[0]), ft_atoi(array[1]), ft_atoi(array[2]));
+		*target = pack_color(game, ft_atoi(array[0]), ft_atoi(array[1]),
+				ft_atoi(array[2]));
 		free_char_array(array);
 	}
 }
