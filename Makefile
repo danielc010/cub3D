@@ -6,7 +6,7 @@
 #    By: dachin <dachin@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2026/06/26 16:02:09 by dachin        #+#    #+#                  #
-#    Updated: 2026/07/08 00:14:24 by dachin        ########   odam.nl          #
+#    Updated: 2026/07/10 16:48:22 by dachin        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = 	src/main.c \
-		src/parse/parse_arg.c \
-		src/parse/parse_tex.c \
-		src/parse/parse_fc.c \
+		src/parse/parse_arguments.c \
+		src/parse/parse_textures.c \
+		src/parse/parse_fc_colors.c \
+		src/parse/parse_map.c \
+		src/parse/parse_player.c \
+		src/parse/flood_fill1.c \
 		src/utils/utils1.c \
 
 OBJ_DIR = o_files

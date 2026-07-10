@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/06/26 15:54:34 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/08 00:16:54 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/10 09:01:25 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	main(int argc, char **argv)
 	if (fd < 0)
 		error_exit(&game, "File open or fd failure");
 	content = (read_lines(fd, &game));
-	dispatcher(&game, content);
-	chk_tex_set(&game);
-	chk_color_set(&game);
+	parse(&game, content);
 	close(fd);
 	return (0);
 }

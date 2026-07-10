@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_fc.c                                         :+:    :+:            */
+/*   parse_fc_colors.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/07 14:09:48 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/08 00:45:48 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/10 08:53:52 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ void	try_color(t_game *game, char *line)
 	pos = 1;
 	if (line[0] == 'C' || line[0] == 'F')
 	{
-		if (line[1] == ' ' || line[1] == '\t')
+		if (line[1] == ' ')
 		{
-			while (line[pos] == ' ' || line[pos] == '\t')
+			while (line[pos] == ' ')
 				++pos;
 		}
 		else

@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_tex.c                                        :+:    :+:            */
+/*   parse_textures.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/07 14:08:23 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/09 13:37:52 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/10 08:59:48 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-// TODO: do we accept tabs? Subject says spaces
 void	try_tex(t_game *game, char *line, char *id, int index)
 {
 	mlx_texture_t	*texture;
@@ -22,9 +21,9 @@ void	try_tex(t_game *game, char *line, char *id, int index)
 	pos = 2;
 	if (!ft_strncmp(line, id, 2))
 	{
-		if (line[2] == ' ' || line[2] == '\t')
+		if (line[2] == ' ')
 		{
-			while (line[pos] == ' ' || line[pos] == '\t')
+			while (line[pos] == ' ')
 				++pos;
 		}
 		else
@@ -42,12 +41,12 @@ void	try_tex(t_game *game, char *line, char *id, int index)
 	}
 }
 
-void	dispatcher(t_game *game, char **content)
+void	dispatcher(t_game *game, char **content, int map_start)
 {
 	int	i;
 
 	i = 0;
-	while (content[i])
+	while (i < map_start)
 	{
 		try_tex(game, content[i], "NO", TEX_NO);
 		try_tex(game, content[i], "SO", TEX_SO);

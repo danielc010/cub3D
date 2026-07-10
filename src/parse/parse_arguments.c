@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_arg.c                                        :+:    :+:            */
+/*   parse_arguments.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/08 00:45:27 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/10 16:52:00 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,30 @@ int	validate_args(int argc, char **argv)
 		return (1);
 	close(fd);
 	return (0);
+}
+
+// Copy the linked list contents to the array. Free nodes but not content.
+char	**list_to_array(t_list *list, t_game *game)
+{
+	int		size;
+	int		i;
+	char	**line_array;
+	t_list	*cur_node;
+
+	size = ft_lstsize(list);
+	line_array = ft_calloc(size + 1, sizeof(char *));
+	if (!line_array)
+		error_exit(game, "readline fail");
+	i = 0;
+	while (i < size)
+	{
+		line_array[i] = list->content;
+		cur_node = list;
+		list = list->next;
+		free(cur_node);
+		++i;
+	}
+	return (line_array);
 }
 
 // Store lines read into a linked list, so we know how much to allocate.
@@ -58,26 +82,15 @@ char	**read_lines(int fd, t_game *game)
 	return (line_array);
 }
 
-// Copy the linked list contents to the array. Free nodes but not content.
-char	**list_to_array(t_list *list, t_game *game)
+void	parse(t_game *game, char **content)
 {
-	int		size;
-	int		i;
-	char	**line_array;
-	t_list	*cur_node;
+	int	map_start;
 
-	size = ft_lstsize(list);
-	line_array = ft_calloc(size + 1, sizeof(char *));
-	if (!line_array)
-		error_exit(game, "readline fail");
-	i = 0;
-	while (i < size)
-	{
-		line_array[i] = list->content;
-		cur_node = list;
-		list = list->next;
-		free(cur_node);
-		++i;
-	}
-	return (line_array);
+	map_start = find_map_start(game, content);
+	dispatcher(game, content, map_start);
+	chk_tex_set(game);
+	chk_color_set(game);
+	parse_map(game, content + map_start);
+	find_player(game);
+	check_map_enclosed(game);
 }

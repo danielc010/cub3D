@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/06/26 15:54:45 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/08 00:21:25 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/10 16:52:42 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void		error_exit(t_game *game, char *msg);
 void		free_grid(t_map *map);
 void		free_map(t_map *map);
 void		free_game(t_game *game);
-char		**read_lines(int fd, t_game *game);
 char		**list_to_array(t_list *list, t_game *game);
+char		**read_lines(int fd, t_game *game);
 void		try_tex(t_game *game, char *line, char *id, int index);
-void		dispatcher(t_game *game, char **content);
+void		dispatcher(t_game *game, char **content, int map_start);
 void		chk_tex_set(t_game *game);
 uint32_t	pack_color(t_game *game, int r, int g, int b);
 void		free_char_array(char **array);
@@ -95,4 +95,12 @@ void		chk_dup_color(char *line, t_game *game);
 char		**extract_chk_color(t_game *game, char *line, int pos);
 void		try_color(t_game *game, char *line);
 void		chk_color_set(t_game *game);
+int			is_all_whitespace(char *line);
+int			find_map_start(t_game *game, char **content);
+void		parse(t_game *game, char **content);
+int			validate_map(char **grid);
+void		parse_map(t_game *game, char **map);
+void		find_player(t_game *game);
+void		check_map_enclosed(t_game *game);
+
 #endif
