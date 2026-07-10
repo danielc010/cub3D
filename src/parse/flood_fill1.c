@@ -6,11 +6,11 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/10 12:41:10 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/10 16:53:44 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/10 18:41:57 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 // Iterate through and free the array rows and finally the array
 static void	free_visited_matrix(char **visited, int rows)
