@@ -6,7 +6,7 @@
 #    By: dachin <dachin@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2026/06/26 16:02:09 by dachin        #+#    #+#                  #
-#    Updated: 2026/07/10 16:48:22 by dachin        ########   odam.nl          #
+#    Updated: 2026/07/12 22:41:04 by dachin        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = 	src/main.c \
 		src/parse/parse_arguments.c \
 		src/parse/parse_textures.c \
-		src/parse/parse_fc_colors.c \
+		src/parse/parse_fc_colors1.c \
+		src/parse/parse_fc_colors2.c \
 		src/parse/parse_map.c \
 		src/parse/parse_player.c \
 		src/parse/flood_fill1.c \
@@ -83,4 +84,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re sanitize
+
+sanitize: CFLAGS += -fsanitize=address -g
+sanitize: re

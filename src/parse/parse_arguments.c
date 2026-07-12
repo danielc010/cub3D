@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/10 18:49:39 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/12 22:33:34 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ char	**list_to_array(t_list *list, t_game *game)
 	size = ft_lstsize(list);
 	line_array = ft_calloc(size + 1, sizeof(char *));
 	if (!line_array)
+	{
+		ft_lstclear(&list, free);
 		error_exit(game, "readline fail");
+	}
 	i = 0;
 	while (i < size)
 	{
@@ -75,7 +78,10 @@ char	**read_lines(int fd, t_game *game)
 			line[len - 1] = '\0';
 		new_node = ft_lstnew(line);
 		if (!new_node)
+		{
+			free(line);
 			error_exit(game, "read_line fail");
+		}
 		ft_lstadd_back(&list, new_node);
 	}
 	line_array = list_to_array(list, game);

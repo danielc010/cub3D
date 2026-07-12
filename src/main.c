@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/06/26 15:54:34 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/10 09:01:25 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/10 20:06:33 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,8 @@ int	main(int argc, char **argv)
 		error_exit(&game, "File open or fd failure");
 	content = (read_lines(fd, &game));
 	parse(&game, content);
+	free_char_array(content);
+	free_game(&game);
 	close(fd);
 	return (0);
 }
-// int main(void)
-// {
-// 	char *a = "1abc";
-
-// 	printf("sys: %d\n", atoi(a));
-// 	printf("libft: %d\n", ft_atoi(a));
-// }
