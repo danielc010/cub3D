@@ -6,7 +6,7 @@
 #    By: dachin <dachin@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2026/06/26 16:02:09 by dachin        #+#    #+#                  #
-#    Updated: 2026/07/12 22:41:04 by dachin        ########   odam.nl          #
+#    Updated: 2026/07/13 14:18:35 by dachin        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = 	src/main.c \
 		src/parse/parse_map.c \
 		src/parse/parse_player.c \
 		src/parse/flood_fill1.c \
+		src/parse/flood_fill2.c \
 		src/utils/utils1.c \
 
 OBJ_DIR = o_files

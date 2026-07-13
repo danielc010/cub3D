@@ -6,14 +6,15 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/10 12:41:10 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/10 18:41:57 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/13 14:29:47 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+#include "../../include/parse.h"
 
 // Iterate through and free the array rows and finally the array
-static void	free_visited_matrix(char **visited, int rows)
+void	free_visited_matrix(char **visited, int rows)
 {
 	int	i;
 
@@ -25,59 +26,86 @@ static void	free_visited_matrix(char **visited, int rows)
 	}
 	free(visited);
 }
+// TODO: Test this unbounded version of recursion
+// static void	flood_fill_reachable(t_game *game,
+// int row, int col, char **visited)
+// {
+// 	if (row < 0 || row >= game->map.rows || col < 0
+// 		|| game->map.grid[row][col] == '\0')
+// 	{
+// 		free_visited_matrix(visited, game->map.rows);
+// 		error_exit(game, "Invalid map, out of bounds");
+// 	}
+// 	if (game->map.grid[row][col] == '1' || visited[row][col] == '1')
+// 		return ;
+// 	if (game->map.grid[row][col] == ' ')
+// 	{
+// 		free_visited_matrix(visited, game->map.rows);
+// 		error_exit(game, "Void area reachable");
+// 	}
+// 	visited[row][col] = '1';
+// 	flood_fill_reachable(game, row - 1, col, visited);
+// 	flood_fill_reachable(game, row + 1, col, visited);
+// 	flood_fill_reachable(game, row, col - 1, visited);
+// 	flood_fill_reachable(game, row, col + 1, visited);
+// }
 
-static void	flood_fill_reachable(t_game *game, int row, int col, char **visited)
+static void	flood_fill_push(t_game *game, t_list **stack, int row, int col)
 {
-	if (row < 0 || row >= game->map.rows || col < 0
-		|| game->map.grid[row][col] == '\0')
-	{
-		free_visited_matrix(visited, game->map.rows);
-		error_exit(game, "Invalid map, out of bounds");
-	}
-	if (game->map.grid[row][col] == '1' || visited[row][col] == '1')
-		return ;
-	if (game->map.grid[row][col] == ' ')
-	{
-		free_visited_matrix(visited, game->map.rows);
-		error_exit(game, "Void area reachable");
-	}
-	visited[row][col] = '1';
-	flood_fill_reachable(game, row - 1, col, visited);
-	flood_fill_reachable(game, row + 1, col, visited);
-	flood_fill_reachable(game, row, col - 1, visited);
-	flood_fill_reachable(game, row, col + 1, visited);
+	t_point	*new;
+	t_list	*node;
+
+	new = ft_calloc(1, sizeof(t_point));
+	if (!new)
+		error_exit(game, "Flood fill calloc failed");
+	new->row = row;
+	new->col = col;
+	node = ft_lstnew(new);
+	ft_lstadd_front(stack, node);
 }
 
-static char	**create_visited_matrix(t_game *game, char **map, int rows)
+static void	flood_fill_pop(t_list **stack, int *row, int *col)
 {
-	char	**visited;
-	int		i;
+	t_list	*temp;
 
-	visited = ft_calloc(rows, sizeof(char *));
-	if (!visited)
-		error_exit(game, "Memory allocation failed");
-	i = 0;
-	while (i < rows)
-	{
-		visited[i] = ft_calloc(ft_strlen(map[i]) + 1, sizeof(char));
-		if (!visited[i])
-		{
-			while (--i >= 0)
-				free(visited[i]);
-			free(visited);
-			error_exit(game, "Memory allocation failed");
-		}
-		++i;
-	}
-	return (visited);
+	*row = ((t_point *)(*stack)->content)->row;
+	*col = ((t_point *)(*stack)->content)->col;
+	temp = *stack;
+	*stack = (*stack)->next;
+	ft_lstdelone(temp, free);
 }
 
-void	check_map_enclosed(t_game *game)
+static void	ff_error(t_game *game, char **visited, t_list **stack, char *msg)
 {
-	char	**visited;
-
-	visited = create_visited_matrix(game, game->map.grid, game->map.rows);
-	flood_fill_reachable(game, (int)game->player.y,
-		(int)game->player.x, visited);
 	free_visited_matrix(visited, game->map.rows);
+	ft_lstclear(stack, free);
+	error_exit(game, msg);
+}
+
+// Iterative recursion where memory is heap allocated instead of stack.
+// Recursion risks stack overflow on large maps.
+void	flood_fill_reachable(t_game *game, int row, int col, char **visited)
+{
+	t_list	*stack;
+
+	stack = NULL;
+	flood_fill_push(game, &stack, row, col);
+	while (stack)
+	{
+		flood_fill_pop(&stack, &row, &col);
+		if (row < 0 || row >= game->map.rows || col < 0
+			|| game->map.grid[row][col] == '\0')
+			ff_error(game, visited, &stack,
+				"Invalid map, out of bounds");
+		if (game->map.grid[row][col] == '1' || visited[row][col] == '1')
+			continue ;
+		if (game->map.grid[row][col] == ' ')
+			ff_error(game, visited, &stack,
+				"Void area reachable");
+		visited[row][col] = '1';
+		flood_fill_push(game, &stack, row - 1, col);
+		flood_fill_push(game, &stack, row + 1, col);
+		flood_fill_push(game, &stack, row, col - 1);
+		flood_fill_push(game, &stack, row, col + 1);
+	}
 }

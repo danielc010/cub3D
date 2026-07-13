@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/06/26 15:54:45 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/10 18:49:57 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/13 14:28:41 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void		parse(t_game *game, char **content);
 int			validate_map(char **grid);
 void		parse_map(t_game *game, char **map);
 void		find_player(t_game *game);
+void		free_visited_matrix(char **visited, int rows);
+void		flood_fill_reachable(t_game *game, int row, int col, char **visited);
 void		check_map_enclosed(t_game *game);
 int			is_wall(t_map *map, int x, int y);
 
