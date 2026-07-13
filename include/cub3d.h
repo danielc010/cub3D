@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/06 22:47:07 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/13 23:28:40 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,19 @@ typedef struct s_game
 	t_map		map;
 }	t_game;
 
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+}	t_ray;
+
 void	load_debug_map(t_game *g);
 void	key_hook(mlx_key_data_t keydata, void* param);
 void	game_loop_hook(void *param);
@@ -80,6 +93,7 @@ int		is_wall(t_map *map, int x, int y);
 
 // B's prototypes
 void	engine_run(t_game *game);
+void	init_ray(t_game *game, t_ray *ray, int x);
 void	raycasting(t_game *game);
 void	handle_close(void* param);
 
