@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/13 23:28:40 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/14 17:50:28 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ typedef struct s_ray
 	double	side_dist_y;
 	int		step_x;
 	int		step_y;
+	int		map_x; //celda actual en X
+	int		map_y; //celda actual en Y
+	int		side;  //0 si el último cruce fue en X, 1 si fue en Y
+	int		hit;   //0 mientras busca, 1 en cuanto encuentra pared
 }	t_ray;
 
 void	load_debug_map(t_game *g);
@@ -94,6 +98,7 @@ int		is_wall(t_map *map, int x, int y);
 // B's prototypes
 void	engine_run(t_game *game);
 void	init_ray(t_game *game, t_ray *ray, int x);
+void	dda(t_game *game, t_ray *ray);
 void	raycasting(t_game *game);
 void	handle_close(void* param);
 
