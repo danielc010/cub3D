@@ -6,33 +6,33 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 23:15:24 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/06 22:46:37 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/14 19:40:54 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	handle_close(void* param)
+void	handle_close(void *param)
 {
-	t_game *game;
+	t_game	*game;
 
-	game = (t_game*)param;
+	game = (t_game *) param;
 	mlx_close_window(game->mlx);
 	return ;
 }
 
-void	key_hook(mlx_key_data_t keydata, void* param)
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_game *game;
+	t_game	*game;
 
-	game = (t_game*)param;
+	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(game->mlx);
 }
 
 void	game_loop_hook(void *param)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)param;
 	raycasting(game);

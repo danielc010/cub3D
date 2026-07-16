@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:10:16 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/05 18:11:25 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/16 23:21:43 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	load_debug_map(t_game *g)
 	g->map.grid = grid;
 	g->map.rows = 5;
 	g->map.cols = 6;
-	g->map.floor_color = 0x404040FF;
-	g->map.ceiling_color = 0x808080FF;
+	g->map.ceiling_color = 0x0000FFFF;
+	g->map.floor_color = 0x00FF00FF;
 	init_player(g);
 }

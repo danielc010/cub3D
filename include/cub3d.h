@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/14 17:50:28 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/16 23:22:42 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define TEX_SO  1
 # define TEX_EA  2
 # define TEX_WE  3
+
+# define WALL_COLOR 0xFF0000FF
 
 typedef struct s_texture
 {
@@ -81,12 +83,16 @@ typedef struct s_ray
 	int		step_y;
 	int		map_x; //celda actual en X
 	int		map_y; //celda actual en Y
-	int		side;  //0 si el último cruce fue en X, 1 si fue en Y
-	int		hit;   //0 mientras busca, 1 en cuanto encuentra pared
+	int		side; //0 si el último cruce fue en X, 1 si fue en Y
+	int		hit; //0 mientras busca, 1 en cuanto encuentra pared
+	double	perp_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }	t_ray;
 
 void	load_debug_map(t_game *g);
-void	key_hook(mlx_key_data_t keydata, void* param);
+void	key_hook(mlx_key_data_t keydata, void *param);
 void	game_loop_hook(void *param);
 
 // A's prototypes
@@ -99,7 +105,9 @@ int		is_wall(t_map *map, int x, int y);
 void	engine_run(t_game *game);
 void	init_ray(t_game *game, t_ray *ray, int x);
 void	dda(t_game *game, t_ray *ray);
+void	calc_wall_height(t_ray *ray);
+void	render_column(t_game *game, t_ray *ray, int x);
 void	raycasting(t_game *game);
-void	handle_close(void* param);
+void	handle_close(void *param);
 
 #endif
