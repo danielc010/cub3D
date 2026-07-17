@@ -6,7 +6,7 @@
 /*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/17 12:32:18 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:43:41 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ void	handle_close(void *param);
 
 // Movement
 void	ahead_and_back(t_game *game, int sign);
+void	move_sideways(t_game *game, int sign);
 
 #endif
