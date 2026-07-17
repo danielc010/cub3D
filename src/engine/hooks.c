@@ -6,7 +6,7 @@
 /*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 23:15:24 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/17 12:44:06 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:09:59 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void	game_loop_hook(void *param)
 		move_sideways(game, -1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_sideways(game, 1);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		rotate(game, -1);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		rotate(game, 1);
 	raycasting(game);
 	return ;
 }
