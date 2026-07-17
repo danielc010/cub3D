@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/16 23:22:42 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/17 12:32:18 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define MOVE_SPEED  0.05
 # define ROT_SPEED   0.03
 # define FOV         0.66
+
+# define COLLISION_MARGIN 0.2
 
 # define TEX_NO  0
 # define TEX_SO  1
@@ -109,5 +111,8 @@ void	calc_wall_height(t_ray *ray);
 void	render_column(t_game *game, t_ray *ray, int x);
 void	raycasting(t_game *game);
 void	handle_close(void *param);
+
+// Movement
+void	ahead_and_back(t_game *game, int sign);
 
 #endif

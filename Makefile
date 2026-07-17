@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lucho <lucho@student.42.fr>                +#+  +:+       +#+         #
+#    By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/26 16:02:09 by dachin            #+#    #+#              #
-#    Updated: 2026/07/16 22:57:20 by lucho            ###   ########.fr        #
+#    Updated: 2026/07/17 11:53:34 by luimarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRCS =	src/main.c \
 		src/engine/hooks.c \
 		src/engine/raycasting.c \
 		src/engine/render.c \
+		src/engine/movement.c \
+
 
 OBJ_DIR = o_files
 OBJS = $(patsubst src/%.c, $(OBJ_DIR)/%.o, $(SRCS))

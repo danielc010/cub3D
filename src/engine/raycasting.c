@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 22:20:48 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/16 23:16:09 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/17 12:24:24 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ void	calc_wall_height(t_ray *ray)
 	ray->draw_start = (HEIGHT / 2) - (ray->line_height / 2);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
+	else if (ray->draw_start >= HEIGHT)
+		ray->draw_start = HEIGHT - 1;
 	ray->draw_end = (HEIGHT / 2) + (ray->line_height / 2);
-	if (ray->draw_end >= HEIGHT)
+	if (ray->draw_end < 0)
+		ray->draw_end = 0;
+	else if (ray->draw_end >= HEIGHT)
 		ray->draw_end = HEIGHT - 1;
 }
 
