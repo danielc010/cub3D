@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+         #
+#    By: lucho <lucho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/26 16:02:09 by dachin            #+#    #+#              #
-#    Updated: 2026/07/17 11:53:34 by luimarti         ###   ########.fr        #
+#    Updated: 2026/07/18 21:45:41 by lucho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =	src/main.c \
 		src/engine/raycasting.c \
 		src/engine/render.c \
 		src/engine/movement.c \
+		src/engine/textures.c
 
 
 OBJ_DIR = o_files

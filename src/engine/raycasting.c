@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 22:20:48 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/17 12:24:24 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/18 21:47:00 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	raycasting(t_game *game)
 	{
 		init_ray(game, &ray, x);
 		dda(game, &ray);
+		get_wall_side(&ray);
 		calc_wall_height(&ray);
 		render_column(game, &ray, x);
 		x++;

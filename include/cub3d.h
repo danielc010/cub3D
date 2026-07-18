@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/17 17:15:46 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/18 21:45:25 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@
 # define TEX_WE  3
 
 # define WALL_COLOR 0xB5764EFF
+
+typedef enum e_wall_side
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_side;
 
 typedef struct s_texture
 {
@@ -91,6 +99,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	t_side	wall_side;
 }	t_ray;
 
 void	load_debug_map(t_game *g);
@@ -116,5 +125,8 @@ void	handle_close(void *param);
 void	ahead_and_back(t_game *game, int sign);
 void	move_sideways(t_game *game, int sign);
 void	rotate(t_game *game, int sign);
+
+//Textures
+void	get_wall_side(t_ray *ray);
 
 #endif
