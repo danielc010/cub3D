@@ -6,7 +6,7 @@
 /*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 11:26:51 by luimarti          #+#    #+#             */
-/*   Updated: 2026/07/17 17:05:47 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/21 12:54:54 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,19 @@ void	rotate(t_game *game, int sign)
 	game->player.dir_y = old_dir_x * sin(angle) + game->player.dir_y * cos(angle);
 	game->player.plane_x = old_plane_x * cos(angle) - game->player.plane_y * sin(angle);
 	game->player.plane_y = old_plane_x * sin(angle) + game->player.plane_y * cos(angle);
+}
 
+int	valid_position(t_game *game, double x, double y)
+{
+	if (game->map.grid[(int)(y - COLLISION_MARGIN)][(int)(x - COLLISION_MARGIN)] == '1')
+		return (0);
+	if (game->map.grid[(int)(y - COLLISION_MARGIN)][(int)(x + COLLISION_MARGIN)] == '1')
+		return (0);
+	if (game->map.grid[(int)(y + COLLISION_MARGIN)][(int)(x - COLLISION_MARGIN)] == '1')
+		return (0);
+	if (game->map.grid[(int)(y + COLLISION_MARGIN)][(int)(x + COLLISION_MARGIN)] == '1')
+		return (0);
+	return(1);
 }
 
 void	ahead_and_back(t_game *game, int sign)
@@ -35,29 +47,21 @@ void	ahead_and_back(t_game *game, int sign)
 
 	new_x = game->player.x + game->player.dir_x * MOVE_SPEED * sign;
 	new_y = game->player.y + game->player.dir_y * MOVE_SPEED * sign;
-	if (game->map.grid[(int)new_y][(int)(new_x + COLLISION_MARGIN)] != '1' &&
-		game->map.grid[(int)new_y][(int)(new_x - COLLISION_MARGIN)] != '1' &&
-		game->map.grid[(int)(new_y + COLLISION_MARGIN)][(int)(new_x)] != '1' &&
-		game->map.grid[(int)(new_y - COLLISION_MARGIN)][(int)(new_x)] != '1')
-	{
+	if (valid_position(game, new_x, game->player.y))
 		game->player.x = new_x;
+	if (valid_position(game, game->player.x, new_y))
 		game->player.y = new_y;
-	}
 }
 
-void move_sideways(t_game *game, int sign)
+void	move_sideways(t_game *game, int sign)
 {
 	double	new_x;
 	double	new_y;
 
 	new_x = game->player.x + game->player.plane_x * MOVE_SPEED * sign;
 	new_y = game->player.y + game->player.plane_y * MOVE_SPEED * sign;
-	if (game->map.grid[(int)new_y][(int)(new_x + COLLISION_MARGIN)] != '1' &&
-		game->map.grid[(int)new_y][(int)(new_x - COLLISION_MARGIN)] != '1' &&
-		game->map.grid[(int)(new_y + COLLISION_MARGIN)][(int)(new_x)] != '1' &&
-		game->map.grid[(int)(new_y - COLLISION_MARGIN)][(int)(new_x)] != '1')
-	{
+	if (valid_position(game, new_x, game->player.y))
 		game->player.x = new_x;
+	if (valid_position(game, game->player.x, new_y))
 		game->player.y = new_y;
-	}
 }

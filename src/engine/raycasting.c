@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 22:20:48 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/18 21:47:00 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/21 13:26:00 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	calc_wall_height(t_ray *ray)
 	else
 		ray->perp_dist = ray->side_dist_y - ray->delta_dist_y;
 	ray->line_height = (int)(HEIGHT / ray->perp_dist);
-	ray->draw_start = (HEIGHT / 2) - (ray->line_height / 2);
+	ray->real_draw_start = (HEIGHT / 2.0) - (ray->line_height / 2.0);
+	ray->draw_start = (int)ray->real_draw_start;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	else if (ray->draw_start >= HEIGHT)
@@ -92,6 +93,7 @@ void	raycasting(t_game *game)
 		dda(game, &ray);
 		get_wall_side(&ray);
 		calc_wall_height(&ray);
+		calc_wall_x(game, &ray);
 		render_column(game, &ray, x);
 		x++;
 	}

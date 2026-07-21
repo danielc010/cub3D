@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:34 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/14 19:41:43 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/21 09:45:18 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(void)
 	t_game	game;
 
 	load_debug_map(&game);
+	load_textures(&game);
 	engine_run(&game);
 	return (0);
 }
