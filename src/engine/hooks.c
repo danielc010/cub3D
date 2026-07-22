@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 23:15:24 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/17 17:09:59 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/22 23:29:59 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,15 @@ void	handle_close(void *param)
 	t_game	*game;
 
 	game = (t_game *) param;
+	free_textures(game);
 	mlx_close_window(game->mlx);
 	return ;
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_game	*game;
-
-	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(game->mlx);
+		handle_close(param);
 }
 
 void	game_loop_hook(void *param)

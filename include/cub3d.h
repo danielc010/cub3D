@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/21 13:23:33 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/22 23:53:35 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@
 # define ROT_SPEED   0.03
 # define FOV         0.66
 
-# define COLLISION_MARGIN 0.5
+# define COL_MARGIN 0.3
 
 # define TEX_NO  0
 # define TEX_SO  1
 # define TEX_EA  2
 # define TEX_WE  3
-
-# define WALL_COLOR 0xB5764EFF
 
 typedef enum e_wall_side
 {
@@ -117,6 +115,7 @@ int			is_wall(t_map *map, int x, int y);
 // B's prototypes
 void		engine_run(t_game *game);
 void		init_ray(t_game *game, t_ray *ray, int x);
+void		calc_ray_steps(t_game *game, t_ray *ray);
 void		dda(t_game *game, t_ray *ray);
 void		calc_wall_height(t_ray *ray);
 void		render_column(t_game *game, t_ray *ray, int x);
@@ -134,5 +133,6 @@ void		calc_wall_x(t_game *game, t_ray *ray);
 uint32_t	get_texture_color(t_game *game, t_ray *ray, int y);
 void		load_one_texture(t_texture *texture, char *path);
 void		load_textures(t_game *game);
+void		free_textures(t_game *game);
 
 #endif

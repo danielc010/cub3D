@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 21:41:25 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/21 13:23:50 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/22 23:15:36 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void	load_one_texture(t_texture *texture, char *path)
 	texture->pixels = (uint32_t *)texture->tex->pixels;
 }
 
-void load_textures(t_game *game)
+void	load_textures(t_game *game)
 {
 	load_one_texture(&game->map.tex[NORTH], "textures/brick.png");
-    load_one_texture(&game->map.tex[SOUTH], "textures/brick.png");
-    load_one_texture(&game->map.tex[EAST], "textures/brick.png");
-    load_one_texture(&game->map.tex[WEST], "textures/brick.png");
+	load_one_texture(&game->map.tex[SOUTH], "textures/thornfloor_damp.png");
+	load_one_texture(&game->map.tex[EAST], "textures/grass.png");
+	load_one_texture(&game->map.tex[WEST], "textures/cliff_ice.png");
 }
