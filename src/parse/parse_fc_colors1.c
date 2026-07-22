@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_fc_colors1.c                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dachin <dachin@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/07/07 14:09:48 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/12 22:41:34 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_fc_colors1.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/07 14:09:48 by dachin            #+#    #+#             */
+/*   Updated: 2026/07/23 00:47:46 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "../../include/cub3d.h"
 
 // Shifting a signed int into its sign bit is undefined behavior in C.
 // r, g, b are declared as plain int (signed). When r = 255, r << 24 shifts a

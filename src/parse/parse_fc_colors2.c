@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_fc_colors2.c                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dachin <dachin@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/07/12 22:28:11 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/12 22:41:19 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_fc_colors2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/12 22:28:11 by dachin            #+#    #+#             */
+/*   Updated: 2026/07/23 00:47:49 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "../../include/cub3d.h"
 
 // TODO: fix leak on early exit for pack_color
 void	try_color(t_game *game, char *line)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_textures.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dachin <dachin@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/07/07 14:08:23 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/10 20:24:11 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_textures.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/07 14:08:23 by dachin            #+#    #+#             */
+/*   Updated: 2026/07/23 00:48:06 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "../../include/cub3d.h"
 
 void	try_tex(t_game *game, char *line, char *id, int index)
 {

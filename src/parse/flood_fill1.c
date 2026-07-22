@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   flood_fill1.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dachin <dachin@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/07/10 12:41:10 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/13 14:29:47 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   flood_fill1.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/10 12:41:10 by dachin            #+#    #+#             */
+/*   Updated: 2026/07/23 00:47:34 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
-#include "../../include/parse.h"
+#include "../../include/cub3d.h"
+#include "parse.h"
 
 // Iterate through and free the array rows and finally the array
 void	free_visited_matrix(char **visited, int rows)

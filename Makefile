@@ -15,22 +15,22 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS =  src/main.c \
-                src/engine/engine.c \
-                src/engine/hooks.c \
-                src/engine/raycasting.c \
-                src/engine/render.c \
-                src/engine/movement.c \
-                src/engine/textures.c \
-                src/engine/cleaning.c \
-                src/parse/parse_arguments.c \
-                src/parse/parse_textures.c \
-                src/parse/parse_fc_colors1.c \
-                src/parse/parse_fc_colors2.c \
-                src/parse/parse_map.c \
-                src/parse/parse_player.c \
-                src/parse/flood_fill1.c \
-                src/parse/flood_fill2.c \
-                src/utils/utils1.c
+	        src/engine/engine.c \
+	        src/engine/hooks.c \
+	        src/engine/raycasting.c \
+	        src/engine/render.c \
+	        src/engine/movement.c \
+	        src/engine/textures.c \
+	        src/engine/cleaning.c \
+	        src/parse/parse_arguments.c \
+	        src/parse/parse_textures.c \
+	        src/parse/parse_fc_colors1.c \
+	        src/parse/parse_fc_colors2.c \
+	        src/parse/parse_map.c \
+	        src/parse/parse_player.c \
+	        src/parse/flood_fill1.c \
+	        src/parse/flood_fill2.c \
+	        src/utils/utils1.c
 
 OBJ_DIR = o_files
 OBJS = $(patsubst src/%.c, $(OBJ_DIR)/%.o, $(SRCS))
@@ -55,29 +55,29 @@ endif
 all: $(MLX42_LIB) $(NAME)
 
 $(MLX42_LIB):
-        cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build --log-level=ERROR
-        cmake --build $(MLX42_DIR)/build --target mlx42 -- -j4
+	cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build --log-level=ERROR
+	cmake --build $(MLX42_DIR)/build --target mlx42 -- -j4
 
 $(LIBFT_LIB):
-        $(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS) $(LIBFT_LIB) $(MLX42_LIB)
-        $(CC) $(CFLAGS) $(OBJS) $(GRAPHICS_LIBS) -L./$(LIBFT_DIR) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(GRAPHICS_LIBS) -L./$(LIBFT_DIR) -lft -o $(NAME)
 
 $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
-        mkdir -p $(dir $@)
-        $(CC) $(CFLAGS) -I$(LIBFT_DIR) -Iinclude -I$(MLX42_DIR)/include -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -Iinclude -I$(MLX42_DIR)/include -c $< -o $@
 
 $(OBJ_DIR):
-        mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)
 
 clean:
-        $(RM) -r $(OBJ_DIR)
-        $(MAKE) -C $(LIBFT_DIR) clean
+	$(RM) -r $(OBJ_DIR)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-        $(RM) $(NAME)
-        $(MAKE) -C $(LIBFT_DIR) fclean
+	$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

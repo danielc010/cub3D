@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "cub3d.h"
 
 // TODO: add mlx_terminate(game->mlx);
 void	error_exit(t_game *game, char *msg)

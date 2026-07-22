@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   flood_fill2.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: dachin <dachin@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/07/13 14:17:45 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/13 14:18:20 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   flood_fill2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/13 14:17:45 by dachin            #+#    #+#             */
+/*   Updated: 2026/07/23 00:47:38 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
+#include "../../include/cub3d.h"
 
 static char	**create_visited_matrix(t_game *game, char **map, int rows)
 {
