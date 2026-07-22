@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/22 23:53:35 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/23 00:12:16 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,7 @@ void		rotate(t_game *game, int sign);
 void		get_wall_side(t_ray *ray);
 void		calc_wall_x(t_game *game, t_ray *ray);
 uint32_t	get_texture_color(t_game *game, t_ray *ray, int y);
-void		load_one_texture(t_texture *texture, char *path);
-void		load_textures(t_game *game);
+void		finalize_textures(t_game *game);
 void		free_textures(t_game *game);
 
 #endif

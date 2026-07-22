@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 21:41:25 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/22 23:15:36 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/23 00:11:52 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,16 @@ uint32_t	get_texture_color(t_game *game, t_ray *ray, int y)
 	return (texture->pixels[tex_y * texture->width + tex_x]);
 }
 
-void	load_one_texture(t_texture *texture, char *path)
+void	finalize_textures(t_game *game)
 {
-	texture->tex = mlx_load_png(path);
-	if (texture->tex == NULL)
-	{
-		printf("Error: %s\n", mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
-	}
-	texture->width = texture->tex->width;
-	texture->height = texture->tex->height;
-	texture->pixels = (uint32_t *)texture->tex->pixels;
-}
+	int	i;
 
-void	load_textures(t_game *game)
-{
-	load_one_texture(&game->map.tex[NORTH], "textures/brick.png");
-	load_one_texture(&game->map.tex[SOUTH], "textures/thornfloor_damp.png");
-	load_one_texture(&game->map.tex[EAST], "textures/grass.png");
-	load_one_texture(&game->map.tex[WEST], "textures/cliff_ice.png");
+	i = 0;
+	while (i < 4)
+	{
+		game->map.tex[i].width = game->map.tex[i].tex->width;
+		game->map.tex[i].height = game->map.tex[i].tex->height;
+		game->map.tex[i].pixels = (uint32_t *)game->map.tex[i].tex->pixels;
+		i++;
+	}
 }
