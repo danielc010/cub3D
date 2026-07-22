@@ -1,48 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/09 17:04:41 by luimarti          #+#    #+#             */
-/*   Updated: 2025/05/08 12:52:05 by luimarti         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_atoi.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dachin <dachin@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/04/23 14:59:02 by dachin        #+#    #+#                 */
+/*   Updated: 2025/07/30 12:21:47 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-
-int	ft_atoi(const char *str)
+#include "libft.h"
+/**
+ * @brief The  atoi() function converts the initial portion of the nptrtring 
+ * pointed to by nptr to int.
+ * @param nptr 
+ * @return int The converted value or 0 on error.
+ */
+int	ft_atoi(const char	*nptr)
 {
-	int	num;
-	int	neg;
 	int	i;
+	int	sign;
+	int	value;
 
-	num = 0;
-	neg = 1;
 	i = 0;
-	while ((str[i] == ' ' ) || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	while (str[i] == '+' || str[i] == '-')
+	sign = 1;
+	value = 0;
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+		++i;
+	if (nptr[i] == '+' || nptr[i] == '-')
 	{
-		if (str[i] == '-')
-			neg = -1;
-		i++;
-		if (str[i] == '+' || str[i] == '-')
-			return (0);
+		if (nptr[i] == '-')
+			sign = -1;
+		++i;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (ft_isdigit(nptr[i]))
 	{
-		num = num * 10 + (str[i] - '0');
-		i++;
+		value = value * 10 + (nptr[i] - '0');
+		++i;
 	}
-	if (neg == -1)
-		num = -num;
-	return (num);
+	return (sign * value);
 }
-// int main(void)
-// {
-// 	printf("%d\n", ft_atoi("-+4866"));
-// 	return (0);
-// }

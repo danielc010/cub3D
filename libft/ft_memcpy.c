@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_memcpy.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: luimarti <luimarti@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/04/24 14:48:45 by luimarti      #+#    #+#                 */
-/*   Updated: 2026/06/15 11:07:41 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 13:12:48 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/28 08:32:36 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "libft.h"
 
+/**
+ * @brief The  memcpy()  function  copies  n  bytes from memory area src to 
+ * memory area dest.  The memory areas must not overlap.  Use memmove(3) if 
+ * the memory areas do overlap.
+ * @param dest 
+ * @param src 
+ * @param n 
+ * @return void* The memcpy() function returns a pointer to dest.
+ */
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned char	*cdest;
-	unsigned char	*csrc;
 	size_t			i;
+	unsigned char	*tmp_src;
+	unsigned char	*tmp_dest;
 
-	if (!dest || !src)
-		return (dest);
-	cdest = (unsigned char *) dest;
-	csrc = (unsigned char *) src;
 	i = 0;
+	if (n == 0 || (!dest && !src))
+		return (dest);
+	tmp_src = (unsigned char *)src;
+	tmp_dest = (unsigned char *)dest;
 	while (i < n)
 	{
-		cdest[i] = csrc[i];
-		i++;
+		tmp_dest[i] = tmp_src[i];
+		++i;
 	}
 	return (dest);
 }
-
-// int main ()
-// {
-// 	char src[] = "Hello, world!";
-// 	char dest [20];
-// 	ft_memcpy(dest, src, 13);
-// 	printf("%s", dest);
-// 	return(0);
-// }

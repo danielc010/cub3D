@@ -3,84 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:09:50 by luimarti          #+#    #+#             */
-/*   Updated: 2025/05/08 14:17:43 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/30 12:07:31 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/07 13:51:51 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
 
-static size_t	check_length(long num);
-static char		*memo_alloc(size_t len);
+static int	ft_length_i(int n)
+{
+	int		length_i;
+	long	m;
+
+	length_i = 0;
+	m = (long)n;
+	if (m < 0)
+		length_i = 1;
+	while (m != 0)
+	{
+		m /= 10;
+		length_i++;
+	}
+	return (length_i);
+}
+
+static char	*ft_zero_helper(void)
+{
+	char	*s;
+
+	s = (char *)malloc(2 * sizeof(char));
+	if (!s)
+		return (NULL);
+	s[0] = '0';
+	s[1] = '\0';
+	return (s);
+}
 
 char	*ft_itoa(int n)
 {
-	int		i;
-	size_t	len;
-	char	*result;
-	long	num;
+	char	*s;
+	int		j;
+	long	m;
 
-	num = n;
-	len = check_length(num);
-	result = memo_alloc(len);
-	if (!result)
+	m = (long)n;
+	j = ft_length_i(m);
+	if (m == 0)
+		return (ft_zero_helper());
+	s = (char *)malloc((j + 1) * sizeof(char));
+	if (!s)
 		return (NULL);
-	if (n == 0)
-		result[0] = '0';
-	if (num < 0)
+	s[j] = '\0';
+	if (n < 0)
 	{
-		result[0] = '-';
-		num = -num;
+		s[0] = '-';
+		m *= -1;
 	}
-	i = len - 1;
-	while (num != 0)
+	while (m > 0 && j > 0)
 	{
-		result[i--] = (num % 10) + '0';
-		num = num / 10;
+		s[j - 1] = m % 10 + '0';
+		m /= 10;
+		--j;
 	}
-	result[len] = '\0';
-	return (result);
+	return (s);
 }
-
-static size_t	check_length(long num)
-{
-	int	counter;
-
-	counter = 0;
-	if (num < 0)
-	{
-		counter++;
-		num = -num;
-	}
-	if (num == 0)
-		counter++;
-	while (num != 0)
-	{
-		num = num / 10;
-		counter++;
-	}
-	return (counter);
-}
-
-static char	*memo_alloc(size_t len)
-{
-	char	*temp;
-
-	temp = ft_calloc(len +1, sizeof(char));
-	if (!temp)
-		return (NULL);
-	return (temp);
-}
-// int main (void)
-// {
-// 	char *result;	
-// 	result = ft_itoa(-10004);
-// 	printf("%s\n", result);
-// 	free (result);
-// 	return (0);
-// }

@@ -3,21 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/26 15:54:34 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/21 09:45:18 by luimarti         ###   ########.fr       */
+/*   Created: 2026/07/23 00:32:54 by lucho             #+#    #+#             */
+/*   Updated: 2026/07/23 00:41:12 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game	game;
+	char	**content;
+	int		fd;
 
-	load_debug_map(&game);
-	load_textures(&game);
+	ft_bzero(&game, sizeof(game));
+	if (validate_args(argc, argv))
+		error_exit(&game, "Invalid arguments / argument count");
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		error_exit(&game, "File open or fd failure");
+	content = read_lines(fd, &game);
+	parse(&game, content);
+	finalize_textures(&game);
+	free_char_array(content);
+	close(fd);
 	engine_run(&game);
+	free_game(&game);
 	return (0);
 }

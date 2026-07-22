@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 19:34:57 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/23 19:48:45 by luimarti         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_bzero.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dachin <dachin@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/04/22 16:49:46 by dachin        #+#    #+#                 */
+/*   Updated: 2026/02/06 16:54:08 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_bzero(void *ptr, size_t num)
+#include "libft.h"
+/**
+ * @brief The bzero() function writes n zeroed bytes to the string s.
+ * If n is zero, bzero() does nothing.
+ * @param s
+ * @param n
+ */
+void	ft_bzero(void	*s, size_t n)
 {
-	unsigned char	*p;
-	size_t			n;
+	unsigned char	*tmp_s;
+	size_t			i;
 
-	p = (unsigned char *) ptr;
-	n = 0;
-	while (n < num)
+	i = 0;
+	tmp_s = (unsigned char *)s;
+	while (i < n)
 	{
-		p[n] = 0;
-		n++;
+		tmp_s[i] = '\0';
+		++i;
 	}
 }
-
-// int	main()
-// {
-// 	char str [30] = "Hello World!";
-
-// 	ft_bzero(str + 2, 2);
-// 	write(1, str, 12);
-// 	write(1, "\n", 1);
-// 	return (0);
-// }

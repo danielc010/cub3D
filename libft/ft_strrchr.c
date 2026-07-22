@@ -3,45 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 11:07:21 by luimarti          #+#    #+#             */
-/*   Updated: 2025/05/08 19:55:57 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/23 16:55:16 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/07 13:55:00 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	int		i;
+	size_t	s_len;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
+	s_len = ft_strlen(s);
+	i = s_len - 1;
 	while (i >= 0)
 	{
-		if (str[i] == (char)c)
-		{
-			return ((char *)&str[i]);
-		}
-		else
-		{
-			i--;
-		}
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		--i;
 	}
+	if (s[s_len] == (char)c)
+		return ((char *)&s[s_len]);
 	return (NULL);
 }
-// int main()
-// {
-// 	const char str [] = "HelloWorld";
-// 	char *result = ft_strrchr(str, 'o');
-// 	char *test = strrchr(str, 'o');
-// 	printf ("%s\n", result);
-// 	printf ("%s\n", test);	
-// 	return (0);
-// }
-
-// //Casting is needed!

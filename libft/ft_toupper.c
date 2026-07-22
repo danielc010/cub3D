@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 10:36:51 by luimarti          #+#    #+#             */
-/*   Updated: 2026/04/18 13:52:34 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/22 17:06:43 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/07 13:55:29 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_toupper(int c)
 {
-	if (c >= 97 && c <= 122)
+	if ((c >= 'a') && (c <= 'z'))
 		return (c - 32);
-	return (c);
+	else
+		return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 21:41:25 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/23 00:11:52 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/23 00:34:12 by lucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	calc_wall_x(t_game *game, t_ray *ray)
 	wall_x = wall_x - floor(wall_x);
 	if (ray->side == 0 && ray->step_x == 1)
 		wall_x = 1 - wall_x;
-	if (ray->side == 0 && ray->step_x == -1)
+	if (ray->side == 1 && ray->step_y == -1)
 		wall_x = 1 - wall_x;
 	ray->wall_x = wall_x;
 }

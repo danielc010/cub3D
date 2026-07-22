@@ -3,38 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 14:23:54 by luimarti          #+#    #+#             */
-/*   Updated: 2025/04/24 20:15:35 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/22 16:49:46 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/27 21:09:36 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	*ft_memset(void *ptr, int value, size_t num)
+/**
+ * @brief The memset() function fills the first n bytes of the memory area 
+ * pointed to by s with the constant byte c.
+ * @param s 
+ * @param c 
+ * @param n 
+ * @return void* The memset() function returns a pointer to the memory area s.
+ */
+void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char	*cptr;
-	unsigned int	cvalue;
-	size_t			n;
+	size_t			i;
+	unsigned char	*tmp_s;
 
-	cptr = (unsigned char *) ptr;
-	cvalue = (unsigned int) value;
-	n = 0;
-	while (n < num)
+	i = 0;
+	tmp_s = (unsigned char *)s;
+	while (i < n)
 	{
-		cptr[n] = cvalue;
-		n++;
+		tmp_s[i] = (unsigned char)c;
+		++i;
 	}
-	return (ptr);
+	return (tmp_s);
 }
-
-// int	main()
-// {
-// 	char str [30] = "Hello World!";
-
-// 	ft_memset(str + 2, 'Z', 5);
-// 	write(1, str, 12);
-// 	write(1, "\n", 1);
-// 	return (0);
-// }

@@ -3,85 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dachin <dachin@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 13:47:23 by luimarti          #+#    #+#             */
-/*   Updated: 2025/05/05 17:58:33 by luimarti         ###   ########.fr       */
+/*   Created: 2025/04/29 12:14:36 by dachin            #+#    #+#             */
+/*   Updated: 2025/05/07 13:55:20 by dachin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
 
-int		searcher(const char *set, char c);
-char	*new_str(const char *s1, size_t start, size_t len);
-
-char	*ft_strtrim(char const *s1, char const *set)
+static int	ft_in_set(char const *set, char c)
 {
-	int		i;
-	int		j;
+	size_t	i;
 
 	i = 0;
-	j = ft_strlen(s1) - 1;
-	if (ft_strlen(s1) == 0)
-		return (ft_strdup(""));
-	while (searcher (set, s1[i]))
-		i++;
-	while (searcher (set, s1[j]))
-		j--;
-	return (new_str(s1, i, j - i +1));
-}
-
-int	searcher(const char *set, char c)
-{
-	int	i;
-
-	i = 0;
-	while (set[i] != '\0')
+	while (i < ft_strlen(set))
 	{
-		if (c == set[i])
+		if (set[i] == c)
 			return (1);
-		i++;
+		++i;
 	}
 	return (0);
 }
 
-char	*new_str(const char *s1, size_t start, size_t len)
+/**
+ * @brief Allocates memory (using malloc(3)) and returns a
+ * copy of 's1' with characters from 'set' removed
+ * from the beginning and the end.
+ * 
+ * @param set The string to be trimmed.
+ * @param c The string containing the set of characters to be removed.
+ * @return int 
+ */
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
+	char	*ptr;
 	size_t	i;
+	size_t	j;
+	size_t	k;
 
-	str = ft_calloc(len + 1, sizeof(char));
 	i = 0;
-	if (len <= 0 || start >= ft_strlen(s1))
-		return (ft_strdup(""));
-	if (!str)
+	j = ft_strlen(s1) - 1;
+	k = 0;
+	while (s1[i] && ft_in_set(set, s1[i]))
+		++i;
+	while (ft_in_set(set, s1[j]) && j > i)
+		--j;
+	ptr = malloc(((j - i) + 2) * sizeof(char));
+	if (!ptr)
 		return (NULL);
-	while (i < len)
+	while (i < j + 1)
 	{
-		str[i] = s1[start + i];
-		i++;
+		ptr[k] = s1[i];
+		++k;
+		++i;
 	}
-	return (str);
+	ptr[k] = '\0';
+	return (ptr);
 }
-
-// int main(void)
-// {
-// 	const char *src = "ooo___HelloCodam___!ooo";
-// 	const char *trimmer = "o_!";
-// 	const char *result;
-// 	result = ft_strtrim(src, trimmer);
-// 	printf ("String after trimming: %s\n", result);
-// 	return (0);
-// }
-// // int main(void)
-// // {
-// // 	const char *src = "";
-// // 	const char *trimmer = "";
-// // 	const char *result;
-// // 	result = ft_strtrim(src, trimmer);
-// // 	printf ("String after trimming: %s\n", result);
-// // 	return (0);
-// // }

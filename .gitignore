@@ -1,22 +1,17 @@
 # Object files
 *.o
 *.a
-
 # Executables
 cub3d
 a.out
-
 # macOS
 .DS_Store
 **/.DS_Store
-
 # Test artifacts
 *.dSYM/
 *.log
-
 # MLX42
 MLX42/
 o_files/
 cub3D
-
 .vscode/

@@ -1,126 +1,109 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:59:29 by luimarti          #+#    #+#             */
-/*   Updated: 2025/10/30 20:06:40 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_split.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dachin <dachin@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/04/29 16:28:00 by dachin        #+#    #+#                 */
+/*   Updated: 2025/12/12 12:58:36 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
 
-static int	subarray_count(const char *s, char c);
-static char	**fill_split(char **big, const char *s, int word_count, char c);
-static void	*free_split(char **big, int filled);
-
-char	**ft_split(const char *s, char c)
-{
-	char		**big;
-	int			word_count;
-
-	if (!s)
-		return (NULL);
-	word_count = subarray_count (s, c);
-	big = (char **)ft_calloc((word_count + 1), sizeof(char *));
-	if (!big)
-		return (NULL);
-	return (fill_split(big, s, word_count, c));
-}
-
-static int	subarray_count(const char *s, char c)
+static int	ft_count_words(char const *s, char c)
 {
 	int	i;
-	int	trigger;
 	int	count;
 
 	i = 0;
-	trigger = 0;
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] != c && trigger == 0)
-		{
-			trigger = 1;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			count++;
-		}
-		else if (s[i] == c)
-			trigger = 0;
-		i++;
+		++i;
 	}
 	return (count);
 }
 
-static char	**fill_split(char **big, const char *s, int word_count, char c)
+static char	*ft_substr_split(char const *s, unsigned int sta, unsigned int end)
 {
-	const char	*str;
-	int			i;
-	int			len;
+	char			*substring;
+	unsigned int	i;
 
 	i = 0;
-	while (*s && i < word_count)
+	substring = malloc((end - sta + 1) * sizeof(char));
+	if (!substring)
+		return (NULL);
+	while (sta < end)
 	{
-		while (*s == c)
-			s++;
-		len = 0;
-		str = s;
-		while (*s && *s != c)
-		{
-			s++;
-			len++;
-		}
-		big[i] = (char *)ft_calloc(len + 1, sizeof(char));
-		if (!big[i])
-			return (free_split(big, i));
-		ft_strlcpy (big[i], str, len + 1);
-		i++;
+		substring[i] = s[sta];
+		++i;
+		++sta;
 	}
-	big[i] = NULL;
-	return (big);
+	substring[i] = '\0';
+	return (substring);
 }
 
-static void	*free_split(char **big, int filled)
+static void	*ft_free_array(char **arr, int arr_len)
 {
 	int	i;
 
 	i = 0;
-	while (i < filled)
+	if (!arr)
+		return (NULL);
+	while (i < arr_len)
 	{
-		free(big[i]);
-		i++;
+		free(arr[i]);
+		++i;
 	}
-	free(big);
+	free(arr);
 	return (NULL);
 }
 
-// int main (void)
-// {
-// 	char *array = ",,,,Hello,world,,from,,,Codam!";
-// 	char del = ',';
-// 	char **result;
-// 	int i;
-// 	i = 0;
-// 	result = ft_split (array, del);
-// 	if (!result)
-// 	{
-// 		printf ("Error! ft_splt does not work.\n");
-// 		return (1);
-// 	}
-// 	while (result[i])
-// 	{
-// 		printf ("Subarray %d: %s\n", i, result[i]);
-// 		i++;
-// 	}
-// 	i = 0;
-// 		while (result[i])
-// 	{
-// 		free(result[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+static void	ft_split_init(int *i, int *j, int *start)
+{
+	*i = 0;
+	*j = 0;
+	*start = -1;
+}
+
+/**
+ * @brief Allocates memory (using malloc(3)) and returns an array of strings
+ * obtained by splitting ’s’ using the character ’c’ as a delimiter. The array
+ * must end with a NULL pointer
+ * @param s The string to be split.
+ * @param c The delimiter character.
+ * @return int The array of new strings resulting from the split. NULL if the
+ * allocation fails.
+ */
+char	**ft_split(char const *s, char c)
+{
+	char	**arr_words;
+	int		i;
+	int		j;
+	int		start;
+
+	ft_split_init(&i, &j, &start);
+	arr_words = malloc((ft_count_words(s, c) + 1) * sizeof(char *));
+	if (!arr_words)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] != c && start == -1)
+			start = i;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		{
+			arr_words[j] = ft_substr_split(s, start, i + 1);
+			if (!arr_words[j])
+				return (ft_free_array(arr_words, j));
+			start = -1;
+			j++;
+		}
+		i++;
+	}
+	arr_words[j] = NULL;
+	return (arr_words);
+}
