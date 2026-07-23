@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 // TODO: fix leak on early exit for pack_color
 void	try_color(t_game *game, char *line)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 #include "parse.h"
 
 // Iterate through and free the array rows and finally the array
