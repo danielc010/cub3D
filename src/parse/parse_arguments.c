@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 // Check for number of arguments, file extension, ability to open file
 int	validate_args(int argc, char **argv)

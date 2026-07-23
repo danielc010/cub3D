@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 // Shifting a signed int into its sign bit is undefined behavior in C.
 // r, g, b are declared as plain int (signed). When r = 255, r << 24 shifts a
