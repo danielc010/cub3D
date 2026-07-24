@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:38:36 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/14 19:41:14 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/24 13:47:28 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	engine_run(t_game *game)
 {
 	int	i;
 
-	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (game->mlx == NULL)
 		return ;
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (game->img == NULL)
+	{
+		mlx_terminate(game->mlx);
 		return ;
+	}
 	i = mlx_image_to_window(game->mlx, game->img, 0, 0);
 	if (i == -1)
 		return ;
@@ -29,4 +32,6 @@ void	engine_run(t_game *game)
 	mlx_close_hook(game->mlx, handle_close, game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
+	free_game(game);
 }

@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lucho <lucho@student.42.fr>                +#+  +:+       +#+         #
+#    By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/23 00:39:56 by lucho             #+#    #+#              #
-#    Updated: 2026/07/23 00:40:00 by lucho            ###   ########.fr        #
+#    Updated: 2026/07/24 12:58:26 by luimarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS =  src/main.c \
 	        src/engine/engine.c \
