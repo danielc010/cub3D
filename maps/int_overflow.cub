@@ -5,7 +5,7 @@ WE ./textures/Brick_12-512x512.png
 
 EA ./textures/Brick_19-512x512.png
 
-F 2147483647,100,0
+F 2147483649,100,0
 C 225,30,0
 
 
