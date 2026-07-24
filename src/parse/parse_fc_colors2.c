@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_fc_colors2.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/12 22:28:11 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/23 00:47:49 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_fc_colors2.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lucho <lucho@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/12 22:28:11 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/24 10:55:40 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// TODO: fix leak on early exit for pack_color
+static uint32_t	color_helper(t_game *game, char **array)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ft_atoi(array[0]);
+	g = ft_atoi(array[1]);
+	b = ft_atoi(array[2]);
+	free_char_array(array);
+	return (pack_color(game, r, g, b));
+}
+
 void	try_color(t_game *game, char *line)
 {
 	int			pos;
@@ -35,8 +47,6 @@ void	try_color(t_game *game, char *line)
 			target = &game->map.floor_color;
 		if (line[0] == 'C')
 			target = &game->map.ceiling_color;
-		*target = pack_color(game, ft_atoi(array[0]), ft_atoi(array[1]),
-				ft_atoi(array[2]));
-		free_char_array(array);
+		*target = color_helper(game, array);
 	}
 }

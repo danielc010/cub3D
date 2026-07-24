@@ -6,18 +6,19 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 14:14:00 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/24 08:30:45 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/24 10:41:04 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// TODO: add mlx_terminate(game->mlx);
 void	error_exit(t_game *game, char *msg)
 {
 	write(2, "Error\n", 6);
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 	free_game(game);
 	exit(1);
 }
@@ -35,10 +36,18 @@ void	free_grid(t_map *map)
 	free(map->grid);
 }
 
-// TODO: look at cleaning up of textures after textures are loaded
 void	free_map(t_map *map)
 {
+	int	i;
+
 	free_grid(map);
+	i = 0;
+	while (i < 4)
+	{
+		if (map->tex[i].tex)
+			mlx_delete_texture(map->tex[i].tex);
+		++i;
+	}
 }
 
 // Safe to call at any point during the program's lifetime.
