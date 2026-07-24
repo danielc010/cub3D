@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/12 22:28:11 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/24 10:55:40 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/24 17:46:48 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,15 @@ static uint32_t	color_helper(t_game *game, char **array)
 	int	r;
 	int	g;
 	int	b;
+	int	i;
 
+	i = 0;
+	while (i < 3)
+	{
+		if (ft_strlen(array[i]) > 3)
+			error_exit(game, "Invalid color format");
+		++i;
+	}
 	r = ft_atoi(array[0]);
 	g = ft_atoi(array[1]);
 	b = ft_atoi(array[2]);
