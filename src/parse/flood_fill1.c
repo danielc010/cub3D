@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   flood_fill1.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/10 12:41:10 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/23 00:47:34 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   flood_fill1.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lucho <lucho@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/10 12:41:10 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/24 10:08:42 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	free_visited_matrix(char **visited, int rows)
 // 	flood_fill_reachable(game, row, col - 1, visited);
 // 	flood_fill_reachable(game, row, col + 1, visited);
 // }
-
+// t_point is used to pass two int values as one pointer into ft_lstnew
+// TODO: check visited leak in ft_calloc and if ft_lstnew fails
 static void	flood_fill_push(t_game *game, t_list **stack, int row, int col)
 {
 	t_point	*new;
@@ -84,6 +85,8 @@ static void	ff_error(t_game *game, char **visited, t_list **stack, char *msg)
 
 // Iterative recursion where memory is heap allocated instead of stack.
 // Recursion risks stack overflow on large maps.
+// DFS pattern here - push, pop. validate, mark visited, push neighbours.
+// Continues till all reachable floor cells processed or error fires.
 void	flood_fill_reachable(t_game *game, int row, int col, char **visited)
 {
 	t_list	*stack;

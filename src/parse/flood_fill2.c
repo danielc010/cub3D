@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   flood_fill2.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/13 14:17:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/23 00:47:38 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   flood_fill2.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lucho <lucho@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/13 14:17:45 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/24 09:39:41 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static char	**create_visited_matrix(t_game *game, char **map, int rows)
 	return (visited);
 }
 
+// Validates the map through flood fill, tracking is via a visited matrix.
 void	check_map_enclosed(t_game *game)
 {
 	char	**visited;

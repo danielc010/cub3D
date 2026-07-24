@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_textures.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/07 14:08:23 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/23 00:48:06 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_textures.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lucho <lucho@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/07 14:08:23 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/24 09:15:23 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+// If identifier matches, check for valid format, dup then load texture.
 void	try_tex(t_game *game, char *line, char *id, int index)
 {
 	mlx_texture_t	*texture;
@@ -57,6 +58,7 @@ void	dispatcher(t_game *game, char **content, int map_start)
 	}
 }
 
+// Check that all textures have been set (game was initialised with ft_bzero).
 void	chk_tex_set(t_game *game)
 {
 	int	i;
@@ -70,6 +72,7 @@ void	chk_tex_set(t_game *game)
 	}
 }
 
+// Check that all colors have been set (game was initialised with ft_bzero).
 void	chk_color_set(t_game *game)
 {
 	if (game->map.floor_color == 0 || game->map.ceiling_color == 0)

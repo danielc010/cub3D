@@ -6,7 +6,7 @@
 /*   By: dachin <dachin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 14:14:00 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/08 00:00:54 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/24 08:30:45 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	free_map(t_map *map)
 	free_grid(map);
 }
 
+// Safe to call at any point during the program's lifetime.
+// ft_bzero at top of main allows this to be called safely while
+// validating arguments (map.grid is NULL).
 void	free_game(t_game *game)
 {
 	free_map(&game->map);

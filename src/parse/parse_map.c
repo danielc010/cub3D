@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/10 08:01:56 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/23 00:47:55 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_map.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lucho <lucho@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/10 08:01:56 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/24 09:35:31 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_all_whitespace(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == ' ' || line[i] == '\t')
+		if (line[i] == ' ')
 			++i;
 		else
 			return (0);
@@ -69,6 +69,7 @@ int	find_map_start(t_game *game, char **content)
 	return (-1);
 }
 
+// Check that only allowed characters are used in the map portion
 int	validate_map(char **grid)
 {
 	int	row;
@@ -92,6 +93,7 @@ int	validate_map(char **grid)
 	return (0);
 }
 
+// Get height of map and allocate memory. Copy rows and validate map.
 void	parse_map(t_game *game, char **map)
 {
 	int	i;
