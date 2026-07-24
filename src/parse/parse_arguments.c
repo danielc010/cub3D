@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_arguments.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/06 12:25:58 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/23 00:47:42 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_arguments.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lucho <lucho@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/24 12:38:34 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,19 @@ char	**list_to_array(t_list *list, t_game *game)
 	return (line_array);
 }
 
-// Store lines read into a linked list, so we know how much to allocate.
-// Strip extra trailing \n from end of the line
-char	**read_lines(int fd, t_game *game)
+void	append_lines(t_game *game, int fd, t_list **list)
 {
-	t_list	*list;
 	char	*line;
-	void	*new_node;
-	char	**line_array;
 	int		len;
-
-	list = NULL;
+	void	*new_node;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
+		{
+			close(fd);
 			break ;
+		}
 		len = ft_strlen(line);
 		if (len != 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
@@ -80,10 +77,23 @@ char	**read_lines(int fd, t_game *game)
 		if (!new_node)
 		{
 			free(line);
+			close(fd);
 			error_exit(game, "read_line fail");
 		}
-		ft_lstadd_back(&list, new_node);
+		ft_lstadd_back(list, new_node);
 	}
+}
+
+// Store lines read into a linked list, so we know how much to allocate.
+// Strip extra trailing \n from end of the line
+char	**read_lines(int fd, t_game *game)
+{
+	t_list	*list;
+	char	**line_array;
+
+	list = NULL;
+	append_lines(game, fd, &list);
+	close(fd);
 	line_array = list_to_array(list, game);
 	return (line_array);
 }
@@ -101,10 +111,3 @@ void	parse(t_game *game, char **content)
 	check_map_enclosed(game);
 }
 
-int	is_wall(t_map *map, int x, int y)
-{
-	if (y < 0 || y >= map->rows || x < 0 || map->grid[y][x] == '\0'
-			|| map->grid[y][x] == '1' || map->grid[y][x] == ' ')
-		return (1);
-	return (0);
-}
