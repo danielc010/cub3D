@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   textures.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: luimarti <luimarti@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/07/18 21:41:25 by lucho         #+#    #+#                 */
-/*   Updated: 2026/07/31 12:18:10 by dachin        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/18 21:41:25 by lucho             #+#    #+#             */
+/*   Updated: 2026/07/31 12:22:02 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ uint32_t	get_texture_color(t_game *game, t_ray *ray, int y)
 	int			tex_x;
 	double		relative_pos;
 	int			tex_y;
+	uint8_t		*pixel;
 
 	texture = &game->map.tex[ray->wall_side];
 	tex_x = (int)(ray->wall_x * texture->width);
@@ -85,7 +86,8 @@ uint32_t	get_texture_color(t_game *game, t_ray *ray, int y)
 		tex_y = 0;
 	else if (tex_y >= texture->height)
 		tex_y = texture->height - 1;
-	return (texture->pixels[tex_y * texture->width + tex_x]);
+	pixel = (uint8_t *)texture->pixels + (tex_y * texture->width + tex_x) * 4;
+	return ((pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | pixel[3]);
 }
 
 void	finalize_textures(t_game *game)
