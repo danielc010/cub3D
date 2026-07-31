@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 22:20:48 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/22 23:53:44 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/31 10:16:33 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+/**
+ * @brief Sets up a ray's initial direction and map position.
+ *
+ * Computes camera_x (this column's position in the FOV, -1 to 1),
+ * combines it with dir/plane to get ray_dir_x/y (this ray's exact
+ * direction), and finds the player's current integer map cell.
+ * Delegates delta_dist/step/side_dist to calc_ray_steps().
+ *
+ * @param game Game state (reads player.dir/plane/x/y).
+ * @param ray  Ray to initialize.
+ * @param x    Screen column (0 to WIDTH-1).
+ */
 
 void	init_ray(t_game *game, t_ray *ray, int x)
 {
@@ -22,6 +35,18 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 	ray->ray_dir_y = game->player.dir_y + game->player.plane_y * ray->camera_x;
 	calc_ray_steps(game, ray);
 }
+
+/**
+ * @brief Computes DDA setup values: delta_dist, step, side_dist.
+ *
+ * delta_dist_x/y: distance to cross one full cell on that axis.
+ * step_x/y: +1 or -1, based on the sign of ray_dir_x/y.
+ * side_dist_x/y: distance to the FIRST grid line to cross, since
+ * the player is rarely exactly on a cell boundary.
+ *
+ * @param game Game state (reads player.x/y for side_dist).
+ * @param ray  Ray with ray_dir_x/y and map_x/y already set.
+ */
 
 void	calc_ray_steps(t_game *game, t_ray *ray)
 {
@@ -47,6 +72,19 @@ void	calc_ray_steps(t_game *game, t_ray *ray)
 		ray->side_dist_y = (game->player.y - ray->map_y) * ray->delta_dist_y;
 }
 
+/**
+ * @brief Walks the ray cell by cell until it hits a wall.
+ *
+ * Each iteration: compares side_dist_x vs side_dist_y, crosses
+ * whichever grid line is closer, advances that axis's map
+ * coordinate and side_dist counter, and records which axis was
+ * crossed in `side` (0=vertical, 1=horizontal). Stops when the
+ * new cell in game->map.grid is a wall ('1').
+ *
+ * @param game Game state (reads map.grid for wall detection).
+ * @param ray  Ray with delta_dist/step/side_dist already set.
+ */
+
 void	dda(t_game *game, t_ray *ray)
 {
 	while (ray->hit == 0)
@@ -68,6 +106,21 @@ void	dda(t_game *game, t_ray *ray)
 	}
 }
 
+/**
+ * @brief Converts the DDA result into an on-screen wall height.
+ *
+ * perp_dist: undoes the DDA's one-step overshoot (side_dist minus
+ * delta_dist), giving the distance perpendicular to the player's
+ * facing direction rather than the ray's own diagonal length —
+ * this avoids the fish-eye effect (curved walls at screen edges).
+ * line_height: inversely proportional to perp_dist (closer = taller).
+ * draw_start/draw_end: the strip centered on HEIGHT/2 (eye level),
+ * clamped to valid screen rows. real_draw_start keeps the unclamped
+ * value for later texture-row sampling (see get_texture_color).
+ *
+ * @param ray Ray with side_dist/delta_dist/side already set by dda().
+ */
+
 void	calc_wall_height(t_ray *ray)
 {
 	if (ray->side == 0)
@@ -87,6 +140,18 @@ void	calc_wall_height(t_ray *ray)
 	else if (ray->draw_end >= HEIGHT)
 		ray->draw_end = HEIGHT - 1;
 }
+
+/**
+ * @brief Renders one full frame: one ray per screen column.
+ *
+ * For each column x (0 to WIDTH-1): builds the ray (init_ray),
+ * walks it to a wall (dda), determines the hit face (get_wall_side),
+ * computes its screen height (calc_wall_height), locates the exact
+ * texture point (calc_wall_x), and paints the column (render_column).
+ * Runs once per frame, called from game_loop_hook after input.
+ *
+ * @param game Game state.
+ */
 
 void	raycasting(t_game *game)
 {

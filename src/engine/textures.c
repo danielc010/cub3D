@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 21:41:25 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/23 00:34:12 by lucho            ###   ########.fr       */
+/*   Updated: 2026/07/31 10:18:26 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ void	get_wall_side(t_ray *ray)
 	}
 }
 
+/**
+ * @brief Computes wall_x: the fraction (0-1) of where along the
+ *        wall's width the ray hit.
+ *
+ * Calculates the exact hit coordinate (player position + perp_dist
+ * * ray_dir, on whichever axis varies for this wall orientation),
+ * keeps only the decimal part (floor()), and applies a mirror
+ * correction on 2 of the 4 possible side/step combinations —
+ * without it, textures would render flipped on those faces.
+ *
+ * @param game Game state (reads player.x/y).
+ * @param ray  Ray with perp_dist/wall_side/ray_dir/side/step set.
+ */
+
 void	calc_wall_x(t_game *game, t_ray *ray)
 {
 	double	wall_x;
@@ -45,6 +59,18 @@ void	calc_wall_x(t_game *game, t_ray *ray)
 		wall_x = 1 - wall_x;
 	ray->wall_x = wall_x;
 }
+
+/**
+ * @brief Paints one full screen column: ceiling, textured wall, floor.
+ *
+ * Loops over all HEIGHT rows for this column, deciding per row
+ * whether to paint ceiling, a texture-sampled wall pixel, or floor,
+ * based on draw_start/draw_end.
+ *
+ * @param game Game state (img, ceiling/floor colors).
+ * @param ray  Ray with draw_start/draw_end/wall_side/wall_x set.
+ * @param x    Screen column being painted.
+ */
 
 uint32_t	get_texture_color(t_game *game, t_ray *ray, int y)
 {
