@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/18 21:41:25 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/31 10:33:11 by luimarti         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   textures.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: luimarti <luimarti@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/18 21:41:25 by lucho         #+#    #+#                 */
+/*   Updated: 2026/07/31 12:18:10 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void	get_wall_side(t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->step_x == 1)
-			ray->wall_side = WEST;
-		else
 			ray->wall_side = EAST;
+		else
+			ray->wall_side = WEST;
 	}
 	else
 	{
 		if (ray->step_y == 1)
-			ray->wall_side = NORTH;
-		else
 			ray->wall_side = SOUTH;
+		else
+			ray->wall_side = NORTH;
 	}
 }
 

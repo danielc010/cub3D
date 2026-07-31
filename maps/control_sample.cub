@@ -1,9 +1,9 @@
-NO ./textures/Brick_08-512x512.png
+NO ./textures/grass.png
 
 SO ./textures/Brick_09-512x512.png
-WE ./textures/wood.png
+WE ./textures/grass.png
 
-EA ./textures/colorstone.png
+EA ./textures/Brick_09-512x512.png
 
 F 220,100,0
 C 225,30,0
