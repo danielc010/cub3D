@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/26 15:54:45 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/31 09:55:02 by luimarti         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: luimarti <luimarti@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/06/26 15:54:45 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/31 10:22:23 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@
 # define HEIGHT 720
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
-// camera plane length (~66 deg FOV)
-# define FOV 0.66
+# define PLANE_LENGTH 0.66
 # define COL_MARGIN 0.3
 
 // Texture indices
@@ -140,7 +139,6 @@ void		free_visited_matrix(char **visited, int rows);
 void		flood_fill_reachable(t_game *game, int row,
 				int col, char **visited);
 void		check_map_enclosed(t_game *game);
-int			is_wall(t_map *map, int x, int y);
 
 // B's prototypes (engine)
 void		engine_run(t_game *game);

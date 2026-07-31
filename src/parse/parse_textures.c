@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/07 14:08:23 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/24 12:24:36 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/31 10:21:44 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,4 @@ void	chk_color_set(t_game *game)
 {
 	if (game->map.floor_color == 0 || game->map.ceiling_color == 0)
 		error_exit(game, "Not all colors set");
-}
-
-int	is_wall(t_map *map, int x, int y)
-{
-	if (y < 0 || y >= map->rows || x < 0 || map->grid[y][x] == '\0'
-			|| map->grid[y][x] == '1' || map->grid[y][x] == ' ')
-		return (1);
-	return (0);
 }
