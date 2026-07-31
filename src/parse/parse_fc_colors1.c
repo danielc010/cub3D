@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_fc_colors1.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lucho <lucho@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/07 14:09:48 by dachin            #+#    #+#             */
-/*   Updated: 2026/07/23 00:47:46 by lucho            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_fc_colors1.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lucho <lucho@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/07 14:09:48 by dachin        #+#    #+#                 */
+/*   Updated: 2026/07/31 09:30:05 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 // Shifting a signed int into its sign bit is undefined behavior in C.
-// r, g, b are declared as plain int (signed). When r = 255, r << 24 shifts a
+// r, g, b are declared as plain int (signed). When r >= 128, r << 24 shifts a
 // 1 bit into bit position 31 - which is the sign bit of a 32-bit signed
 // integer. Hence we cast the numbers to uint32_t before shifting.
 uint32_t	pack_color(t_game *game, int r, int g, int b)
