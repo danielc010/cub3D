@@ -6,7 +6,7 @@
 /*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 22:20:48 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/31 10:16:33 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/31 10:33:01 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
  * @param ray  Ray to initialize.
  * @param x    Screen column (0 to WIDTH-1).
  */
-
 void	init_ray(t_game *game, t_ray *ray, int x)
 {
 	ray->map_x = (int)game->player.x;
@@ -47,7 +46,6 @@ void	init_ray(t_game *game, t_ray *ray, int x)
  * @param game Game state (reads player.x/y for side_dist).
  * @param ray  Ray with ray_dir_x/y and map_x/y already set.
  */
-
 void	calc_ray_steps(t_game *game, t_ray *ray)
 {
 	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
@@ -84,7 +82,6 @@ void	calc_ray_steps(t_game *game, t_ray *ray)
  * @param game Game state (reads map.grid for wall detection).
  * @param ray  Ray with delta_dist/step/side_dist already set.
  */
-
 void	dda(t_game *game, t_ray *ray)
 {
 	while (ray->hit == 0)
@@ -120,7 +117,6 @@ void	dda(t_game *game, t_ray *ray)
  *
  * @param ray Ray with side_dist/delta_dist/side already set by dda().
  */
-
 void	calc_wall_height(t_ray *ray)
 {
 	if (ray->side == 0)
@@ -152,7 +148,6 @@ void	calc_wall_height(t_ray *ray)
  *
  * @param game Game state.
  */
-
 void	raycasting(t_game *game)
 {
 	int		x;

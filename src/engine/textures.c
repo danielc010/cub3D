@@ -6,7 +6,7 @@
 /*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 21:41:25 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/31 10:18:26 by luimarti         ###   ########.fr       */
+/*   Updated: 2026/07/31 10:33:11 by luimarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	get_wall_side(t_ray *ray)
  * @param game Game state (reads player.x/y).
  * @param ray  Ray with perp_dist/wall_side/ray_dir/side/step set.
  */
-
 void	calc_wall_x(t_game *game, t_ray *ray)
 {
 	double	wall_x;
@@ -71,7 +70,6 @@ void	calc_wall_x(t_game *game, t_ray *ray)
  * @param ray  Ray with draw_start/draw_end/wall_side/wall_x set.
  * @param x    Screen column being painted.
  */
-
 uint32_t	get_texture_color(t_game *game, t_ray *ray, int y)
 {
 	t_texture	*texture;
