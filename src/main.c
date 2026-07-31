@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: luimarti <luimarti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/23 00:32:54 by lucho             #+#    #+#             */
-/*   Updated: 2026/07/24 13:32:37 by luimarti         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: luimarti <luimarti@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/07/23 00:32:54 by lucho         #+#    #+#                 */
+/*   Updated: 2026/07/31 06:03:21 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	main(int argc, char **argv)
 	finalize_textures(&game);
 	free_char_array(content);
 	engine_run(&game);
-	// free_game(&game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/24 12:38:34 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/31 06:03:44 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	append_lines(t_game *game, int fd, t_list **list)
 	char	*line;
 	int		len;
 	void	*new_node;
+
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -110,4 +111,3 @@ void	parse(t_game *game, char **content)
 	find_player(game);
 	check_map_enclosed(game);
 }
-
