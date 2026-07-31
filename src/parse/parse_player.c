@@ -6,7 +6,7 @@
 /*   By: lucho <lucho@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/10 11:49:57 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/31 10:22:43 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/31 10:38:44 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,15 @@ static void	player_details_ew(t_game *game, int y, int x)
 	}
 }
 
-// Validate number of players.
-// Locate starting position of the player, set directional details.
-// Finally set player position in grid to \0, so flood fill does not
-// mis-recognise it (only '1', '0', ' '). Grid is also kept clean for renderer.
+/**
+ * @brief Validate number of players.
+ * Locate starting position of the player, set directional details.
+ * Finally set player position in grid to \0, so flood fill does not
+ * mis-recognise it (only '1', '0', ' '). Grid is also kept clean for
+ * renderer.
+ *
+ * @param game
+ */
 void	find_player(t_game *game)
 {
 	int	players;

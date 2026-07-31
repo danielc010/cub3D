@@ -6,13 +6,19 @@
 /*   By: lucho <lucho@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/06 12:25:58 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/31 06:03:44 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/31 10:37:12 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// Check for number of arguments, file extension, ability to open file
+/**
+ * @brief Check for number of arguments, file extension, ability to open file
+ *
+ * @param argc
+ * @param argv
+ * @return int
+ */
 int	validate_args(int argc, char **argv)
 {
 	size_t	len;
@@ -30,7 +36,14 @@ int	validate_args(int argc, char **argv)
 	return (0);
 }
 
-// Copy the linked list contents to the array. Free nodes but not content.
+/**
+ * @brief Copy the linked list contents to the array. Free nodes but not
+ * content.
+ *
+ * @param list
+ * @param game
+ * @return char**
+ */
 char	**list_to_array(t_list *list, t_game *game)
 {
 	int		size;
@@ -85,8 +98,14 @@ void	append_lines(t_game *game, int fd, t_list **list)
 	}
 }
 
-// Store lines read into a linked list, so we know how much to allocate.
-// Strip extra trailing \n from end of the line
+/**
+ * @brief Store lines read into a linked list, so we know how much to
+ * allocate. Strip extra trailing \n from end of the line
+ *
+ * @param fd
+ * @param game
+ * @return char**
+ */
 char	**read_lines(int fd, t_game *game)
 {
 	t_list	*list;

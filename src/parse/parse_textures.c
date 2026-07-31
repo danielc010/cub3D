@@ -6,13 +6,20 @@
 /*   By: lucho <lucho@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/07/07 14:08:23 by dachin        #+#    #+#                 */
-/*   Updated: 2026/07/31 10:21:44 by dachin        ########   odam.nl         */
+/*   Updated: 2026/07/31 10:39:31 by dachin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// If identifier matches, check for valid format, dup then load texture.
+/**
+ * @brief If identifier matches, check for valid format, dup then load texture.
+ *
+ * @param game
+ * @param line
+ * @param id
+ * @param index
+ */
 void	try_tex(t_game *game, char *line, char *id, int index)
 {
 	mlx_texture_t	*texture;
@@ -58,7 +65,13 @@ void	dispatcher(t_game *game, char **content, int map_start)
 	}
 }
 
-// Check that all textures have been set (game was initialised with ft_bzero).
+/**
+ * @brief // Check that all textures have been set (game was initialised
+ * with ft_bzero).
+ *
+ * @param game
+ */
+
 void	chk_tex_set(t_game *game)
 {
 	int	i;
@@ -72,7 +85,12 @@ void	chk_tex_set(t_game *game)
 	}
 }
 
-// Check that all colors have been set (game was initialised with ft_bzero).
+/**
+ * @brief Check that all colors have been set (game was initialised
+ * with ft_bzero).
+ *
+ * @param game
+ */
 void	chk_color_set(t_game *game)
 {
 	if (game->map.floor_color == 0 || game->map.ceiling_color == 0)
